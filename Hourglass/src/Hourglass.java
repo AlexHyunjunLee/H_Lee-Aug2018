@@ -9,6 +9,7 @@ public class Hourglass {
 		printMiddle();
 		printBottomMiddle();
 		printBase();
+		printBottomMiddle2();
 	}
 	public static void printBase() {
 		System.out.print("|");
@@ -63,6 +64,22 @@ public class Hourglass {
 			System.out.print(":");
 		}
 		System.out.println("\\");
+	}
+	public static void printBottomMiddle2() {
+		for (int i=2;i<=8;i+=2) {
+			int j = 0;
+			int h = i+1;
+			while (h>i) {
+				System.out.print("");
+				h--;
+			}
+			System.out.print("/");
+			while (j<i) {
+				System.out.print(":");
+				j++;
+			}
+			System.out.println("\\");
+		}
 	}
 }
 
