@@ -9,7 +9,6 @@ public class Hourglass {
 		printMiddle();
 		printBottomMiddle();
 		printBase();
-		printBottomMiddle2();
 	}
 	public static void printBase() {
 		System.out.print("|");
@@ -18,72 +17,38 @@ public class Hourglass {
 		}
 		System.out.println("|");
 	}
-	public static void printTopMiddle() {
-		System.out.print(" \\");
-		for (int i=0;i<8;i++) {
-			System.out.print(":");
-		}
-		System.out.println("/");
-		System.out.print("  \\");
-		for (int i=0;i<6;i++) {
-			System.out.print(":");
-		}
-		System.out.println("/");
-		System.out.print("   \\");
-		for (int i=0;i<4;i++) {
-			System.out.print(":");
-		}
-		System.out.println("/");
-		System.out.print("    \\");
-		for (int i=0;i<2;i++) {
-			System.out.print(":");
-		}
-		System.out.println("/");
-	}
 	public static void printMiddle() {
 		System.out.println("     ||");
 	}
-	public static void printBottomMiddle() {
-		System.out.print("    /");
-		for (int i=0;i<2;i++) {
-			System.out.print(":");
-		}
-		System.out.println("\\");
-		System.out.print("   /");
-		for (int i=0;i<4;i++) {
-			System.out.print(":");
-		}
-		System.out.println("\\");
-		System.out.print("  /");
-		for (int i=0;i<6;i++) {
-			System.out.print(":");
-		}
-		System.out.println("\\");
-		System.out.print(" /");
-		for (int i=0;i<8;i++) {
-			System.out.print(":");
-		}
-		System.out.println("\\");
-	}
-	public static void printBottomMiddle2() {
-		for (int i=2;i<=8;i+=2) {
+	public static void printTopMiddle() {
+		for (int i=4;i>=1;i--) {
 			int j = 0;
-			int h = i+1;
-			while (h>i) {
-				System.out.print("");
-				h--;
+			for (int h=i;h<=4;h++) {
+				System.out.print(" ");
+			}
+			System.out.print("\\");
+			while (j<i) {
+				System.out.print("::");
+				j++;
+			}
+			System.out.println("/");
+		}
+	}
+	public static void printBottomMiddle() {
+		for (int i=1;i<=4;i++) {
+			int j = 0;
+			for (int h=i;h<=4;h++) {
+				System.out.print(" ");
 			}
 			System.out.print("/");
 			while (j<i) {
-				System.out.print(":");
+				System.out.print("::");
 				j++;
 			}
 			System.out.println("\\");
 		}
 	}
 }
-
-
 
 
 
