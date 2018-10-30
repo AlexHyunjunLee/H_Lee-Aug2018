@@ -24,7 +24,8 @@ public class Split {
 * the sandwich and ignores what's on the outside
 * What if it's a fancy sandwich with multiple pieces of bread?
 */
-	 System.out.println(Arrays.toString("applespineapplesbreadlettustomatobaconmayohambreadcheese".split("bread")));
+	 String[] ingredientside = "applespineapplesbreadlettustomatobaconmayohambreadcheese".split("bread");
+	 System.out.println(ingredientside[ingredientside.length/2]);
 //Your task pt 2:
 /*Write a method that take in a string like
 * "apples pineapples bread lettus tomato bacon mayo ham bread cheese"
@@ -33,5 +34,7 @@ public class Split {
 * the sandwich and ignores what's on the outside.
 * Again, what if it's a fancy sandwich with multiple pieces of bread?
 */
+	 String[] ingredients = "apples pineapples bread lettus tomato bacon mayo ham bread cheese".split(" ");
+	 System.out.println(ingredients[ingredients.length/2]);
  }
 }
