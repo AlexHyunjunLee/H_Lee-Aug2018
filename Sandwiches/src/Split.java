@@ -24,8 +24,13 @@ public class Split {
 * the sandwich and ignores what's on the outside
 * What if it's a fancy sandwich with multiple pieces of bread?
 */
-	 String[] ingredientInside = "applespineapplesbreadlettustomatobaconmayohambreadcheese".split("bread");
-	 System.out.println(ingredientInside[ingredientInside.length/2]);
+	 sandwichSplitP1("applespineapplesbreadlettustomatobaconmayohambreadcheese");//the outcome from Part1
+	 sandwichSplitP2("apples pineapples bread lettus tomato bacon mayo ham bread cheese");//the outcome from Part2
+ }
+	 public static void sandwichSplitP1(String x) {
+		 String[] ingredientInside = x.split("bread");
+		 System.out.println(ingredientInside[ingredientInside.length/2]);
+	 }
 //Your task pt 2:
 /*Write a method that take in a string like
 * "apples pineapples bread lettus tomato bacon mayo ham bread cheese"
@@ -34,7 +39,8 @@ public class Split {
 * the sandwich and ignores what's on the outside.
 * Again, what if it's a fancy sandwich with multiple pieces of bread?
 */
-	 String[] ingredients = "apples pineapples bread lettus tomato bacon mayo ham bread cheese".split(" ");
-	 System.out.println(ingredients[ingredients.length/2]);
- }
+	 public static void sandwichSplitP2(String x) {
+		 String[] ingredients = x.split(" ");
+		 System.out.println(ingredients[ingredients.length/2]);
+	 }
 }
