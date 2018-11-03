@@ -41,6 +41,23 @@ public class Split {
 */
 	 public static void sandwichSplitP2(String x) {
 		 String[] ingredients = x.split(" ");
-		 System.out.println(ingredients[ingredients.length/2]);
+		 for (int i=3;i<ingredients.length-2;i++) {
+		 System.out.print(ingredients[i]+" ");
+		 }
 	 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
