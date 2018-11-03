@@ -1,3 +1,7 @@
+/*This class prints out the ingredients of the sandwich using Spring.split
+ * @author Alex Lee
+ * @versions November 2, 2018
+ */
 import java.util.*;
 public class Split {
  public static void main(String[] args) {
