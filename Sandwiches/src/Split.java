@@ -44,10 +44,11 @@ public class Split {
 * Again, what if it's a fancy sandwich with multiple pieces of bread?
 */
 	 public static void sandwichSplitP2(String x) {
-		 String[] ingredients = x.split(" ");
-		 for (int i=3;i<ingredients.length-2;i++) {
-		 System.out.print(ingredients[i]+" ");
-		 }
+			String foodInside = x.substring(x.indexOf("bread")+6, x.lastIndexOf("bread"));
+			String[] ingredients = foodInside.split(" ");
+			for (int i=0;i<ingredients.length;i++) {
+				System.out.print(ingredients[i]+" ");
+			}
 	 }
 }
 
