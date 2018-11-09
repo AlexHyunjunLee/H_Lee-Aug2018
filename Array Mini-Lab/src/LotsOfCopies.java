@@ -16,6 +16,7 @@ public class LotsOfCopies {
 		System.out.println("arrMain: " + Arrays.toString(arrMain));
 		part2WithInts();
 		part2WithStrings();
+		part2WithArrays();
 	}
 	public static void changeMe(int x, String str, int[] arr) {
 		x = 229886;
@@ -35,5 +36,14 @@ public class LotsOfCopies {
 		a = "Bye";// a = newValue
 		System.out.println("a: " + a);
 		System.out.println("b: " + b);
+	}
+	public static void part2WithArrays() {
+		int[] a = {0, 1, 2};// a = startValue
+		int[] b = a;// b = a
+		for (int i=0;i<a.length;i++) {
+			a[i] = i+1;// a = newValue
+		}
+		System.out.println("a: " + Arrays.toString(a));
+		System.out.println("b: " + Arrays.toString(b));
 	}
 }
