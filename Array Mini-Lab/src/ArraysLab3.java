@@ -41,7 +41,7 @@ public class ArraysLab3 {
 		return sumOfEvens;
 	}
 	
-	public static void rotateRight(int[] arr1, int[] arr2) {
+	public static void rotateRight(int[] arr) {
 		
 	}
 }
