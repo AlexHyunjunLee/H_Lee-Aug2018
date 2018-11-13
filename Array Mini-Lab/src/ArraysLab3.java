@@ -1,6 +1,21 @@
+import java.util.Arrays;
 
 public class ArraysLab3 {
 	public static void main(String[] args) {
+		int[] a1 = {5, 10, 15, 20, 25, 30, 35, 40};
+		int[] a2 = {7, 14, 21, 28, 35, 42, 49, 56};
+		int[] sumArr = ArraysLab3.sum(a1, a2);
+		int appendNum = 200;
+		int[] appendArr = ArraysLab3.append(a1, appendNum);
+		int removeIdx = 5;
+		int[] removeArr = ArraysLab3.remove(a2, removeIdx);
+		int sumOfEvens = ArraysLab3.sumEven(appendArr);
+		ArraysLab3.rotateRight(a1);
+		System.out.println(Arrays.toString(sumArr));
+		System.out.println(Arrays.toString(appendArr));
+		System.out.println(Arrays.toString(removeArr));
+		System.out.println(sumOfEvens);
+		System.out.println(Arrays.toString(a1));
 	}
 	
 	public static int[] sum(int[] arr1, int[] arr2) {
@@ -42,6 +57,10 @@ public class ArraysLab3 {
 	}
 	
 	public static void rotateRight(int[] arr) {
-		
+		int lastDigit = arr[0];
+		for (int i=0;i<arr.length-1;i++) {
+			arr[i] = arr[i+1];
+		}
+		arr[arr.length-1] = lastDigit;
 	}
 }
