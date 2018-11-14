@@ -1,5 +1,10 @@
 import java.util.Arrays;
 
+/*This class prints out the arrays using various methods in order to perform a mini lab
+ * @author Alex Lee
+ * @versions November 13, 2018
+ */
+
 public class LotsOfCopies {
 	public static void main(String[] args) {
 		int num = 7;

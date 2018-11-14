@@ -1,5 +1,10 @@
 import java.util.Arrays;
 
+/*This class prints out the arrays using various methods
+ * @author Alex Lee
+ * @versions November 13, 2018
+ */
+
 public class ArraysLab3 {
 	public static void main(String[] args) {
 		int[] a1 = {5, 10, 15, 20, 25, 30, 35, 40};
