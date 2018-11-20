@@ -17,8 +17,7 @@ public class FracCalc {
     		String expression = input.nextLine();
     		System.out.println(FracCalc.produceAnswer(expression));
     		System.out.println("More calculations? (Type \"yes\" to continue or \"quit\" to end)");
-			input.nextLine();// Consume newline left-over
-			String result = input.nextLine();
+    		String result = input.nextLine();// Consume newline left-over
 			String check = result.replaceAll("\\s","");//removing spaces
 			if (check.toLowerCase().contains("quit")) {//if the input contains the word "quit" regardless of the caps 
 				done = true;
@@ -106,7 +105,7 @@ public class FracCalc {
     		numerator = ((whole * denominator) + numerator);
     		numerator *= -1;
     	}
-    	int finalfrac[] = new int [] {0, numerator, denominator};
+    	int finalfrac[] = {0, numerator, denominator};
     	return finalfrac;   	
     }
     
