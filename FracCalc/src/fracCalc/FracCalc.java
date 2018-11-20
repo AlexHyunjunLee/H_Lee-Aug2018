@@ -49,9 +49,9 @@ public class FracCalc {
     	} else if (operator.equals(" - ")) {
     		result = subtraction(frac1, frac2);
     	} else if (operator.equals(" * ")) {
-    		
+    		result = multiplication(frac1, frac2);
     	} else if (operator.equals(" / ")) {
-    		
+    		result = division(frac1, frac2);
     	}
     	result = reduceFrac(result);
     	if (result[1]==0) {//if numerator is zero, the value is whole number
@@ -124,6 +124,20 @@ public class FracCalc {
     	return result;
     }
     
+    public static int[] multiplication(int[] frac1, int[] frac2) {
+    	int [] result = new int [3];
+    	result [2]= frac1[2] * frac2[2];//denominator is multiplication of two denominators
+    	result [1]= (frac1[1] * frac2[1]);
+    	return result;
+    }
+    
+    public static int[] division(int[] frac1, int[] frac2) {
+    	int [] result = new int [3];
+    	result [2]= frac1[2] * frac2[1];//denominator is multiplication of two denominators
+    	result [1]= (frac1[1] * frac2[2]);
+    	return result;
+    }
+    
     public static int [] reduceFrac(int [] calculatedFrac) {
     	int gcf;
     	int finalFrac[]= calculatedFrac;
@@ -152,7 +166,7 @@ public class FracCalc {
     	} else {
     		count = denominator;
     	}
-		for(int i = 1; i < Math.abs(count); i++) {
+		for (int i = 1; i < Math.abs(count); i++) {
 			if(numerator % i == 0 && denominator % i == 0) {
 				gcf = i;
 			}
