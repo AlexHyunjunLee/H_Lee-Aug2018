@@ -13,13 +13,13 @@ public class FracCalc {
     	boolean done = false;
     	while (!done) {
     		System.out.println("Type in the calculation");
+    		System.out.println("(Type \"quit\" to end)");
     		String expression = input.nextLine();
-    		System.out.println(FracCalc.produceAnswer(expression));
-    		System.out.println("More calculations? (Type \"yes\" to continue or \"quit\" to end)");
-    		String result = input.nextLine();
-			String check = result.replaceAll("\\s","");//removing spaces
+    		String check = expression.replaceAll("\\s","");//removing spaces
 			if (check.toLowerCase().contains("quit")) {//if the input contains the word "quit" regardless of the caps 
 				done = true;
+			} else {
+    		System.out.println(FracCalc.produceAnswer(expression));
 			}
     	}
     }
