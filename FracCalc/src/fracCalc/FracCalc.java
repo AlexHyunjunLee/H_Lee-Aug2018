@@ -1,5 +1,4 @@
 package fracCalc;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*This class contains the methods that are used to calculate fractions
@@ -17,7 +16,7 @@ public class FracCalc {
     		String expression = input.nextLine();
     		System.out.println(FracCalc.produceAnswer(expression));
     		System.out.println("More calculations? (Type \"yes\" to continue or \"quit\" to end)");
-    		String result = input.nextLine();// Consume newline left-over
+    		String result = input.nextLine();
 			String check = result.replaceAll("\\s","");//removing spaces
 			if (check.toLowerCase().contains("quit")) {//if the input contains the word "quit" regardless of the caps 
 				done = true;
@@ -79,22 +78,6 @@ public class FracCalc {
         }
     	int[] finalFrac = {whole, numerator, denominator};
     	return finalFrac;
-    }
-    
-    public static String prepareCalc(String input) {
-    	String[] wholeCalc = input.split(" ");
-    	String[] frac1 = {wholeCalc[0]};
-    	String[] operator = {wholeCalc[1]};
-    	String[] frac2 = {wholeCalc[2]};
-    	return Arrays.toString(frac1) + Arrays.toString(operator) + Arrays.toString(frac2);
-    }
-    
-    public static void calculate(String[] frac1, String[] operator, String[] frac2) {
-    	if (Arrays.toString(operator)=="+") {
-    	} else if (Arrays.toString(operator)=="-") {
-    	} else if (Arrays.toString(operator)=="*") {
-    	} else if (Arrays.toString(operator)=="/") {
-    	}
     }
     
     public static int[] toImproperFrac(int whole, int numerator, int denominator) {
