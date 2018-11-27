@@ -63,6 +63,14 @@ public class FracCalc {
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
+    //method that detects the index of the nth occurring character 
+    public static int findPosition(String str, String substr, int n) {
+        int position = str.indexOf(substr);
+        while (--n > 0 && position != -1)
+        	position = str.indexOf(substr, position + 1);
+        return position;
+    }
+    
     public static int[] parseFrac(String frac) {
     	int whole = 0;
         int numerator = 0;
