@@ -47,14 +47,18 @@ public class FracCalc {
     //this was originally the produceAnswer
     public static String calculate(String input) {
         // TODO: Implement this function to produce the solution to the input
+    	//separates the string into fraction1, fraction2, operator
     	String fraction1 = input.substring(0, input.indexOf(" "));
         String operator = input.substring((input.indexOf(" ")), (input.indexOf(" ")+ 3)); 
         String fraction2 = input.substring(input.lastIndexOf(" ") + 1);
         int[] frac1 = parseFrac(fraction1);
         int[] frac2 = parseFrac(fraction2);
+        //making them to the improper fraction so that it is easier to calculate
         frac1 = toImproperFrac(frac1[0], frac1[1], frac1[2]);
         frac2 = toImproperFrac(frac2[0], frac2[1], frac2[2]);
+        //store the final calculated fraction into the variable of result
     	int[] result = new int [3];
+    	//does the calculation based on the types of the operators: +, -, *, /
     	if (operator.equals(" + ")) {
     		result = addition(frac1, frac2);
     	} else if (operator.equals(" - ")) {
@@ -65,6 +69,7 @@ public class FracCalc {
     		result = division(frac1, frac2);
     	}
     	result = reduceFrac(result);
+    	//based on the result, choose the way to print out (whole number or mixed fraction or normal fraction)
     	if (result[1]==0) {//if numerator is zero, the value is whole number
         	return "" + result[0];
         }
@@ -84,6 +89,7 @@ public class FracCalc {
         return position;
     }
     
+    //method that checks if the input passed in is available for the calculation
     public static void checkCondition(String calculation) {
     	if (calculation.indexOf("/0")!=-1) {
     		System.out.println("ERROR: Cannot divide by zero");
@@ -92,6 +98,7 @@ public class FracCalc {
     	}
     }
     
+    //method that parses the fraction and stores it into the array
     public static int[] parseFrac(String frac) {
     	int whole = 0;
         int numerator = 0;
@@ -99,7 +106,7 @@ public class FracCalc {
         if (frac.indexOf("_") > 0) {// Test if there is an whole number.
         	whole = Integer.valueOf(frac.substring(0, frac.indexOf("_")));
         }
-        if (frac.indexOf("/") < 0) {// Test if there is a fraction.
+        if (frac.indexOf("/") < 0) {// Test if there is a fraction. if / presents, there is fraction
         	whole = Integer.valueOf(frac);
         } else {
         	numerator = Integer.valueOf(frac.substring(frac.indexOf("_") + 1, frac.indexOf("/")));
@@ -109,6 +116,7 @@ public class FracCalc {
     	return finalFrac;
     }
     
+    //method that converts any types of fractions to the improper fraction
     public static int[] toImproperFrac(int whole, int numerator, int denominator) {
     	if (whole >= 0){
     	numerator = ((whole * denominator) + numerator);
@@ -121,6 +129,7 @@ public class FracCalc {
     	return finalfrac;   	
     }
     
+    //method that does addition
     public static int[] addition(int[] frac1, int[] frac2) {
     	int [] result = new int [3];
     	result [2]= frac1[2] * frac2[2];//denominator is multiplication of two denominators
@@ -128,6 +137,7 @@ public class FracCalc {
     	return result;
     }
     
+    //method that does subtraction
     public static int[] subtraction(int[] frac1, int[] frac2) {
     	int [] result = new int [3];
     	result [2]= frac1[2] * frac2[2];//denominator is multiplication of two denominators
@@ -135,6 +145,7 @@ public class FracCalc {
     	return result;
     }
     
+    //method that does multiplication
     public static int[] multiplication(int[] frac1, int[] frac2) {
     	int [] result = new int [3];
     	result [2]= frac1[2] * frac2[2];//denominator is multiplication of two denominators
@@ -142,6 +153,7 @@ public class FracCalc {
     	return result;
     }
     
+    //method that does division
     public static int[] division(int[] frac1, int[] frac2) {
     	int [] result = new int [3];
     	result [2]= frac1[2] * frac2[1];//denominator is multiplication of two denominators
@@ -149,6 +161,7 @@ public class FracCalc {
     	return result;
     }
     
+    //method that reduces the fraction into the simplest form that the fraction can be
     public static int [] reduceFrac(int [] calculatedFrac) {
     	int gcf;
     	int finalFrac[]= calculatedFrac;
@@ -168,7 +181,7 @@ public class FracCalc {
     	return finalFrac;
     }
     
-  //Calculates the greatest common factor of two integers
+    //Calculates the greatest common factor of two integers
     public static int gcf(int numerator, int denominator) {
     	int gcf = 1; // Set the initial value of gcf to 1 (the lowest possible gcf)
 		int count; // Set it to whichever number is larger.
