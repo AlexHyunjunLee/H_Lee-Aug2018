@@ -33,6 +33,18 @@ public class FracCalc {
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input) {
+    	parseFrac(input);
+    	if (input=="") {
+    		checkCondition(input);
+    	} else {
+    		calculate(input);
+    	}
+    	return "";
+    }
+    
+    //changed it to the calculate from the produceAnswer for the extra credit
+    //this was originally the produceAnswer
+    public static String calculate(String input) {
         // TODO: Implement this function to produce the solution to the input
     	String fraction1 = input.substring(0, input.indexOf(" "));
         String operator = input.substring((input.indexOf(" ")), (input.indexOf(" ")+ 3)); 
@@ -71,10 +83,10 @@ public class FracCalc {
         return position;
     }
     
-    public static void checkCondition(String fraction) {
-    	if (fraction.indexOf("/")+1==0) {
+    public static void checkCondition(String calculation) {
+    	if (calculation.indexOf("/0")!=-1) {
     		System.out.println("ERROR: Cannot divide by zero");
-    	} if (fraction.contains("++")||fraction.contains("--")||fraction.contains("**")||fraction.contains("//")||fraction.contains("  ")) {
+    	} if (calculation.contains("++")||calculation.contains("--")||calculation.contains("**")||calculation.contains("//")||calculation.contains("  ")) {
     		System.out.println("ERROR: Input is in an invalid format");
     	}
     }
