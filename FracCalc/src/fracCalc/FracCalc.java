@@ -71,6 +71,14 @@ public class FracCalc {
         return position;
     }
     
+    public static void checkCondition(String fraction) {
+    	if (fraction.indexOf("/")+1==0) {
+    		System.out.println("ERROR: Cannot divide by zero");
+    	} if (fraction.contains("++")||fraction.contains("--")||fraction.contains("**")||fraction.contains("//")||fraction.contains("  ")) {
+    		System.out.println("ERROR: Input is in an invalid format");
+    	}
+    }
+    
     public static int[] parseFrac(String frac) {
     	int whole = 0;
         int numerator = 0;
