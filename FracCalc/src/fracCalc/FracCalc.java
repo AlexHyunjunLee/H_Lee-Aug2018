@@ -11,14 +11,17 @@ public class FracCalc {
     public static void main(String[] args) {
         // TODO: Read the input from the user and call produceAnswer with an equation
     	boolean done = false;
+    	jeonledongha();
     	while (!done) {
     		System.out.println("Type in the calculation (Type \"quit\" to end)");
     		String expression = input.nextLine();
     		String check = expression.replaceAll("\\s","");//removing spaces
 			if (check.toLowerCase().contains("quit")) {//if the input contains the word "quit" regardless of the caps 
 				done = true;
+			} else if(!check.contains("/")||expression.contains("  ")) {//if there is no fraction then there will be no "/" and also, it can't have double spaces
+				FracCalc.checkCondition(expression);
 			} else {
-    		System.out.println(FracCalc.produceAnswer(expression));
+				System.out.println(FracCalc.produceAnswer(expression));
 			}
     	}
     }
@@ -67,7 +70,7 @@ public class FracCalc {
     	} else if (operator.equals(" / ")) {
     		result = division(frac1, frac2);
     	}
-    	result = reduceFrac(result);
+    	result = reduceFrac(result);//reduce
     	//based on the result, choose the way to print out (whole number or mixed fraction or normal fraction)
     	if (result[1]==0) {//if numerator is zero, the value is whole number
         	return "" + result[0];
@@ -80,6 +83,7 @@ public class FracCalc {
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
+    //part of Extra Credit
     //method that detects the index of the nth occurring character 
     public static int findPosition(String str, String substr, int n) {
         int position = str.indexOf(substr);
@@ -88,13 +92,20 @@ public class FracCalc {
         return position;
     }
     
+    //part of Extra Credit
     //method that checks if the input passed in is available for the calculation
     public static void checkCondition(String calculation) {
-    	if (calculation.indexOf("/0")!=-1) {
+    	if (calculation.indexOf("/0")!=-1||calculation.indexOf("* 0/")!=-1) {
     		System.out.println("ERROR: Cannot divide by zero");
-    	} if (calculation.contains("++")||calculation.contains("--")||calculation.contains("**")||calculation.contains("//")||calculation.contains("  ")) {
+    	} if (calculation.contains("++")||calculation.contains("--")||calculation.contains("**")||calculation.contains("//")||calculation.contains("  ")||!calculation.contains("/")||calculation.contains("  ")) {
     		System.out.println("ERROR: Input is in an invalid format");
     	}
+    }
+    
+    //part of Extra Credit
+    //IDK
+    public static void jeonledongha() {
+    	System.out.println("");
     }
     
     //method that parses the fraction and stores it into the array
