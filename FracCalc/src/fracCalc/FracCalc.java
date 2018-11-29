@@ -12,8 +12,7 @@ public class FracCalc {
         // TODO: Read the input from the user and call produceAnswer with an equation
     	boolean done = false;
     	while (!done) {
-    		System.out.println("Type in the calculation");
-    		System.out.println("(Type \"quit\" to end)");
+    		System.out.println("Type in the calculation (Type \"quit\" to end)");
     		String expression = input.nextLine();
     		String check = expression.replaceAll("\\s","");//removing spaces
 			if (check.toLowerCase().contains("quit")) {//if the input contains the word "quit" regardless of the caps 
@@ -172,7 +171,7 @@ public class FracCalc {
     	}	
     	finalFrac[0] += finalFrac[1]/finalFrac[2];//convert improper fraction to whole fraction
     	finalFrac[1] = finalFrac[1]%finalFrac[2];
-    	if(finalFrac[0]!=0 && finalFrac[1]<0) {
+    	if(finalFrac[0]!=0 && finalFrac[1]<0) {//getting rid of the possible negative in the numerator
     		finalFrac[1] *= -1;	
     	}
     	gcf = gcf(finalFrac[1], finalFrac[2]);//calculate GCF to simplify the fraction
@@ -190,8 +189,8 @@ public class FracCalc {
     	} else {
     		count = denominator;
     	}
-		for (int i = 1; i < Math.abs(count); i++) {
-			if(numerator % i == 0 && denominator % i == 0) {
+		for (int i=1;i<Math.abs(count);i++) {
+			if(numerator%i == 0 && denominator%i == 0) {
 				gcf = i;
 			}
 		}
