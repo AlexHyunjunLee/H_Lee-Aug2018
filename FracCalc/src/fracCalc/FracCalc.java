@@ -49,25 +49,17 @@ public class FracCalc {
         // TODO: Implement this function to produce the solution to the input
     	//separates the string into fraction1, fraction2, operator
     	String fraction1 = input.substring(0, input.indexOf(" "));
-        String operator = input.substring((input.indexOf(" ")), (input.indexOf(" ")+ 3)); 
+        String operator = input.substring((input.indexOf(" ")), (input.indexOf(" ")+ 3));
         String fraction2 = input.substring(input.lastIndexOf(" ") + 1);
         int[] frac1 = parseFrac(fraction1);
         int[] frac2 = parseFrac(fraction2);
         //making them to the improper fraction so that it is easier to calculate
         frac1 = toImproperFrac(frac1[0], frac1[1], frac1[2]);
         frac2 = toImproperFrac(frac2[0], frac2[1], frac2[2]);
-        //store the final calculated fraction into the variable of result
+        //store the final calculated fraction into the variable named result
     	int[] result = new int [3];
     	//does the calculation based on the types of the operators: +, -, *, /
-    	if (operator.equals(" + ")) {
-    		result = addition(frac1, frac2);
-    	} else if (operator.equals(" - ")) {
-    		result = subtraction(frac1, frac2);
-    	} else if (operator.equals(" * ")) {
-    		result = multiplication(frac1, frac2);
-    	} else if (operator.equals(" / ")) {
-    		result = division(frac1, frac2);
-    	}
+    	result = calculation(frac1,frac2,operator);
     	result = reduceFrac(result);//reduce
     	return fracForm(result);
     }
@@ -114,7 +106,24 @@ public class FracCalc {
     			"Marxist historians such as Eric Hobsbawm, E. P. Thompson, Rodney Hilton, Georges Lefebvre, Eugene Genovese, Isaac Deutscher, C. L. R. James, Timothy Mason, Herbert Aptheker, Arno J. Mayer and Christopher Hill have sought to validate Karl Marx's theories by analyzing history from a Marxist perspective. In response to the Marxist interpretation of history, historians such as François Furet, Richard Pipes, J. C. D. Clark, Roland Mousnier, Henry Ashby Turner and Robert Conquest have offered anti-Marxist interpretations of history. Feminist historians such as Joan Wallach Scott, Claudia Koonz, Natalie Zemon Davis, Sheila Rowbotham, Gisela Bock, Gerda Lerner, Elizabeth Fox-Genovese, and Lynn Hunt have argued for the importance of studying the experience of women in the past. In recent years, postmodernists have challenged the validity and need for the study of history on the basis that all history is based on the personal interpretation of sources. In his 1997 book In Defence of History, Richard J. Evans defended the worth of history. Another defence of history from post-modernist criticism was the Australian historian Keith Windschuttle's 1994 book, The Killing of History.");
     }
     
+    //based on the operator(+,-,*,/), does the calculation
+    //originally came from the produceAnswer
+    public static int[] calculation(int[] frac1, int[] frac2, String operator) {
+    	int[] result = new int [3];
+    	if (operator.equals(" + ")) {
+    		result = addition(frac1, frac2);
+    	} else if (operator.equals(" - ")) {
+    		result = subtraction(frac1, frac2);
+    	} else if (operator.equals(" * ")) {
+    		result = multiplication(frac1, frac2);
+    	} else if (operator.equals(" / ")) {
+    		result = division(frac1, frac2);
+    	}
+    	return result;
+    }
+    
     //based on the result, choose the way to print out (whole number or mixed fraction or normal fraction)
+    //originally came from the produceAnswer
     public static String fracForm(int[] result) {
     	if (result[1]==0) {//if numerator is zero, the value is whole number
         	return "" + result[0];
