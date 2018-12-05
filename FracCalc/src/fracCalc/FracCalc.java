@@ -16,10 +16,10 @@ public class FracCalc {
     		String expression = input.nextLine();
 			if (expression.equals("quit")) {//if the input contains the word "quit" regardless of the caps 
 				done = true;
-			} else if(expression.contains("  ")) {
+			} else if(checkCondition(expression).equals("pass")) {
 				System.out.println(produceAnswer(expression));
 			} else {
-				expression = (checkCondition(expression));
+				System.out.println(checkCondition(expression));
 			}
     	}
     }
@@ -32,20 +32,22 @@ public class FracCalc {
     //        
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
-    public static String calculate(String input) {
-    	parseFrac(input);
-    	if (input=="") {
-    		checkCondition(input);
-    	} else {
-    		produceAnswer(input);
+    public static String produceAnswer(String input) {
+    	String answer = input;
+    	boolean done = false;
+    	while (!done) {
+    		if (answer.contains(" ")) {//only 1 fraction without spaces left if the calculation is complete
+    			answer = prepareCalc(answer);
+    		} else {
+    			done = true;
+    		}
     	}
-    	return "";
-    	// NOT DONE...
+    	return answer;
     }
     
     //changed it to the calculate from the produceAnswer for the extra credit
     //this was originally the produceAnswer
-    public static String produceAnswer(String input) {
+    public static String calculateAnswer(String input) {
         // TODO: Implement this function to produce the solution to the input
     	//separates the string into fraction1, fraction2, operator
     	String fraction1 = input.substring(0, input.indexOf(" "));
@@ -59,7 +61,7 @@ public class FracCalc {
         //store the final calculated fraction into the variable named result
     	int[] result = new int [3];
     	//does the calculation based on the types of the operators: +, -, *, /
-    	result = calculation(frac1,frac2,operator);
+    	result = normalCalculation(frac1,frac2,operator);
     	result = reduceFrac(result);//reduce
     	return fracForm(result);
     }
@@ -74,6 +76,42 @@ public class FracCalc {
         return position;
     }
     
+  //cuts the string into two strings (one for calculation and other for rest expression)
+    //The first part will take the first two values with one operator 
+    //The rest will be stored, and once first part is calculated from calculateAnswer, it will be attach together again
+    public static String prepareCalc (String calculation) {
+    	String answer = calculation;
+    	int numOfOperator = 0;
+    	String vol1 = "";
+    	String vol2 = "";
+    	for (int i = 0; i < answer.length()-1; i++) {
+    	//check how many operators there are in the string
+    		if (answer.substring(i, i+2).equals("+ ")) {
+    			numOfOperator++;
+    		} 
+    		if (answer.substring(i, i+2).equals("- ")) {
+    			numOfOperator++;
+    		} 
+    		if (answer.substring(i, i+2).equals("* ")) {
+    			numOfOperator++;
+    		} 
+    		if (answer.substring(i, i+2).equals("/ ")) {
+    			numOfOperator++;
+    		} 
+    	}
+    	if (numOfOperator >= 2) {
+    	//cut the string so that the first string only has two values with one operator
+    	//and the rest part of the string stored in vol2.
+    		vol1 = answer.substring(0, findPosition(answer," ",3));
+    		vol2 = answer.substring(findPosition(answer, " ",3));
+    	} else {
+    		vol1 = calculation;
+    	}
+    	String firstAnswer = calculateAnswer(vol1);
+    	String result = firstAnswer + vol2;
+    	return result;
+	}
+    
     //part of Extra Credit
     //method that checks if the input passed in is available for the calculation
     public static String checkCondition(String input) {
@@ -82,37 +120,34 @@ public class FracCalc {
     		if (input.substring(i,i+1).equals(" "))
     			spaces++;
     	}
-    	if (input.indexOf("/0")!=-1||input.indexOf("* 0/")!=-1) {//("* 0/") part of EC (the order of operation)
-    		return ("ERROR: Cannot divide by zero");
-    	} if (spaces%2==1) {//there are even amount of spaces for every input, therefore, having odd amount of spaces is invalid
+    	String result = "pass";
+    	if (spaces%2==1||spaces==0) {//there are even amount of spaces for every input, therefore, having odd amount of spaces is invalid
     		return ("ERROR: Input is in an invalid format");
     	}
     	int num = 1;
     	while (num<spaces) {
-    		String operator = findPosition(input, " ", num);
+    		String operator = input.substring(findPosition(input," ",num), findPosition(input," ",num+1)+1);
     		if (operator.equals(" + ")) {
         	} else if (operator.equals(" - ")) {
         	} else if (operator.equals(" * ")) {
         	} else if (operator.equals(" / ")) {
+        	} else {
+        		result ="Error: Input is in an invalid format";
+        	}
+    		num+=2;//there is one operator for every two spaces
+        	if (!result.equals("pass")) {
+        		num+=spaces;
         	}
     	}
-    	if (input.contains("++")||input.contains("--")
-    	    	||input.contains("**")||input.contains("//")
-    	    	||input.contains("  ")||!input.contains("/")||input.contains("  ")) {
-    	    		return ("ERROR: Input is in an invalid format");
-    	    	} else {
-    	    		return "";
-    	    	}
-    }
-    
-    //part of Extra Credit
-    //IDK
-    public static void jeonledongha() {
+    	if (input.indexOf("/0")!=-1||input.indexOf("* 0/")!=-1&&result.equals("work")) {//("* 0/") part of EC (the order of operation)
+    		result = "ERROR: Cannot divide by zero";
+    	}
+    	return result;
     }
     
     //based on the operator(+,-,*,/), does the calculation
     //originally came from the produceAnswer
-    public static int[] calculation(int[] frac1, int[] frac2, String operator) {
+    public static int[] normalCalculation(int[] frac1, int[] frac2, String operator) {
     	int[] result = new int [3];
     	if (operator.equals(" + ")) {
     		result = addition(frac1, frac2);
