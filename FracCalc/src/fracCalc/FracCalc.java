@@ -79,11 +79,11 @@ public class FracCalc {
   //cuts the string into two strings (one for calculation and other for rest expression)
     //The first part will take the first two values with one operator 
     //The rest will be stored, and once first part is calculated from calculateAnswer, it will be attach together again
-    public static String prepareCalc (String calculation) {
-    	String answer = calculation;
+    public static String prepareCalc (String input) {
+    	String answer = input;
     	int numOfOperator = 0;
-    	String vol1 = "";
-    	String vol2 = "";
+    	String calc1 = "";
+    	String calc2 = "";
     	for (int i = 0; i < answer.length()-1; i++) {
     	//check how many operators there are in the string
     		if (answer.substring(i, i+2).equals("+ ")) {
@@ -102,13 +102,13 @@ public class FracCalc {
     	if (numOfOperator >= 2) {
     	//cut the string so that the first string only has two values with one operator
     	//and the rest part of the string stored in vol2.
-    		vol1 = answer.substring(0, findPosition(answer," ",3));
-    		vol2 = answer.substring(findPosition(answer, " ",3));
+    		calc1 = answer.substring(0, findPosition(answer," ",3));
+    		calc2 = answer.substring(findPosition(answer, " ",3));
     	} else {
-    		vol1 = calculation;
+    		calc1 = input;
     	}
-    	String firstAnswer = calculateAnswer(vol1);
-    	String result = firstAnswer + vol2;
+    	String firstAnswer = calculateAnswer(calc1);
+    	String result = firstAnswer + calc2;
     	return result;
 	}
     
