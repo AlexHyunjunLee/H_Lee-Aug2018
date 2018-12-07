@@ -22,7 +22,6 @@ public class FracCalc {
 				System.out.println(checkCondition(expression));
 			}
     	}
-    	System.out.println("¡Olé!");
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
@@ -33,12 +32,12 @@ public class FracCalc {
     //        
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
-    public static String produceAnswer(String input) {
-    	String answer = input;
+    public static String produceAnswer(String calculation) {
+    	String answer = calculation;
     	boolean done = false;
     	while (!done) {
     		if (answer.contains(" ")) {//only 1 fraction without spaces left if the calculation is complete
-    			answer = prepareCalc(answer);
+    			answer = multipleCalc(answer);
     		} else {
     			done = true;
     		}
@@ -46,7 +45,6 @@ public class FracCalc {
     	return answer;
     }
     
-    //changed it to the calculate from the produceAnswer for the extra credit
     //this was originally the produceAnswer
     public static String calculateAnswer(String input) {
         // TODO: Implement this function to produce the solution to the input
@@ -62,7 +60,7 @@ public class FracCalc {
         //store the final calculated fraction into the variable named result
     	int[] result = new int [3];
     	//does the calculation based on the types of the operators: +, -, *, /
-    	result = normalCalculation(frac1,frac2,operator);
+    	result = basicCalculation(frac1,frac2,operator);
     	result = reduceFrac(result);//reduce
     	return fracForm(result);
     }
@@ -72,16 +70,17 @@ public class FracCalc {
     //method that detects the index of the nth occurring character 
     public static int findPosition(String str, String substr, int n) {
         int position = str.indexOf(substr);
-        while (--n > 0 && position != -1)
-        	position = str.indexOf(substr, position + 1);
+        while (--n > 0 && position != -1) {
+        	position = str.indexOf(substr, position + 1);//Returns the index of string substr, starting from the specified index (position+1)
+        }
         return position;
     }
     
   //cuts the string into two strings (one for calculation and other for rest expression)
     //The first part will take the first two values with one operator 
     //The rest will be stored, and once first part is calculated from calculateAnswer, it will be attach together again
-    public static String prepareCalc (String input) {
-    	String answer = input;
+    public static String multipleCalc (String calculation) {
+    	String answer = calculation;
     	int numOfOperator = 0;
     	String calc1 = "";
     	String calc2 = "";
@@ -106,7 +105,7 @@ public class FracCalc {
     		calc1 = answer.substring(0, findPosition(answer," ",3));
     		calc2 = answer.substring(findPosition(answer, " ",3));
     	} else {
-    		calc1 = input;
+    		calc1 = calculation;
     	}
     	String firstAnswer = calculateAnswer(calc1);
     	String result = firstAnswer + calc2;
@@ -148,7 +147,7 @@ public class FracCalc {
     
     //based on the operator(+,-,*,/), does the calculation
     //originally came from the produceAnswer
-    public static int[] normalCalculation(int[] frac1, int[] frac2, String operator) {
+    public static int[] basicCalculation(int[] frac1, int[] frac2, String operator) {
     	int[] result = new int [3];
     	if (operator.equals(" + ")) {
     		result = addition(frac1, frac2);
@@ -239,7 +238,6 @@ public class FracCalc {
     
     //method that reduces the fraction into the simplest form that the fraction can be
     public static int [] reduceFrac(int [] calculatedFrac) {
-    	int gcf;
     	int finalFrac[]= calculatedFrac;
     	finalFrac = toImproperFrac(finalFrac[0], finalFrac[1], finalFrac[2]);
     	if (finalFrac[2]<0) {//checking that the denominator is positive
@@ -251,7 +249,7 @@ public class FracCalc {
     	if(finalFrac[0]!=0 && finalFrac[1]<0) {//getting rid of the possible negative in the numerator
     		finalFrac[1] *= -1;	
     	}
-    	gcf = gcf(finalFrac[1], finalFrac[2]);//calculate GCF to simplify the fraction
+    	int gcf = gcf(finalFrac[1], finalFrac[2]);//calculate GCF to simplify the fraction
     	finalFrac[1] /= gcf;
     	finalFrac[2] /= gcf;
     	return finalFrac;
@@ -261,13 +259,13 @@ public class FracCalc {
     public static int gcf(int numerator, int denominator) {
     	int gcf = 1; // Set the initial value of gcf to 1 (the lowest possible gcf)
 		int count; // Set it to whichever number is larger.
-    	if (numerator == denominator || numerator > denominator ) {
+    	if (numerator==denominator || numerator>denominator ) {
     		count = numerator;
     	} else {
     		count = denominator;
     	}
 		for (int i=1;i<Math.abs(count);i++) {
-			if(numerator%i == 0 && denominator%i == 0) {
+			if(numerator%i==0 && denominator%i==0) {
 				gcf = i;
 			}
 		}
