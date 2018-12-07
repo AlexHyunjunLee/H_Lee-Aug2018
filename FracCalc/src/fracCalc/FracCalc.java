@@ -81,24 +81,9 @@ public class FracCalc {
     //The rest will be stored, and once first part is calculated from calculateAnswer, it will be attach together again
     public static String multipleCalc (String calculation) {
     	String answer = calculation;
-    	int numOfOperator = 0;
+    	int numOfOperator = operationChecker(calculation);
     	String calc1 = "";
     	String calc2 = "";
-    	for (int i = 0; i < answer.length()-1; i++) {
-    	//check how many operators there are in the string
-    		if (answer.substring(i, i+2).equals("+ ")) {
-    			numOfOperator++;
-    		} 
-    		if (answer.substring(i, i+2).equals("- ")) {
-    			numOfOperator++;
-    		} 
-    		if (answer.substring(i, i+2).equals("* ")) {
-    			numOfOperator++;
-    		} 
-    		if (answer.substring(i, i+2).equals("/ ")) {
-    			numOfOperator++;
-    		} 
-    	}
     	if (numOfOperator >= 2) {
     	//cut the string so that the first string only has two values with one operator
     	//and the rest part of the string stored in vol2.
@@ -111,6 +96,28 @@ public class FracCalc {
     	String result = firstAnswer + calc2;
     	return result;
 	}
+    
+    //Originated from multipleCalc
+    //checks how many operators are in the calculation
+    public static int operationChecker(String input) {
+    	int numOfOperator = 0;
+    	for (int i = 0; i < input.length()-1; i++) {
+        	//check how many operators there are in the string
+        		if (input.substring(i, i+2).equals("+ ")) {
+        			numOfOperator++;
+        		} 
+        		if (input.substring(i, i+2).equals("- ")) {
+        			numOfOperator++;
+        		} 
+        		if (input.substring(i, i+2).equals("* ")) {
+        			numOfOperator++;
+        		} 
+        		if (input.substring(i, i+2).equals("/ ")) {
+        			numOfOperator++;
+        		} 
+        	}
+    	return numOfOperator;
+    }
     
     //part of Extra Credit
     //method that checks if the input passed in is available for the calculation
