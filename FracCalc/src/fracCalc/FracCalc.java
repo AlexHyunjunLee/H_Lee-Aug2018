@@ -71,14 +71,14 @@ public class FracCalc {
     public static int findPosition(String str, String substr, int n) {
         int position = str.indexOf(substr);
         while (--n > 0 && position != -1) {
-        	position = str.indexOf(substr, position + 1);//Returns the index of string substr, starting from the specified index (position+1)
+        	position = str.indexOf(substr, position + 1);//Returns the index of string substr, starting from the specified index of (position+1)
         }
         return position;
     }
     
     //part of EC
     //cuts the string into two strings: one for calculation and other for the rest
-    //It takes the first two values with one operator 
+    //It firstly takes the first two values with one operator 
     //The rest will be stored, and once first part is calculated, it will be attach together again
     public static String multipleCalc (String calculation) {
     	String answer = calculation;
