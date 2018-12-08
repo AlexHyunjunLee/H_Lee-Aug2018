@@ -14,7 +14,7 @@ public class FracCalc {
     	while (!done) {
     		System.out.println("Type in the calculation (Type \"quit\" to end)");
     		String expression = input.nextLine();
-			if (expression.equals("quit")) {//if the input contains the word "quit" regardless of the caps 
+			if (expression.equals("quit")) { 
 				done = true;
 			} else if(checkCondition(expression).equals("pass")) {
 				System.out.println(produceAnswer(expression));
