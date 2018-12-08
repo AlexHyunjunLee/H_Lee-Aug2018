@@ -76,27 +76,29 @@ public class FracCalc {
         return position;
     }
     
-  //cuts the string into two strings (one for calculation and other for rest expression)
-    //The first part will take the first two values with one operator 
-    //The rest will be stored, and once first part is calculated from calculateAnswer, it will be attach together again
+    //part of EC
+    //cuts the string into two strings: one for calculation and other for the rest
+    //It takes the first two values with one operator 
+    //The rest will be stored, and once first part is calculated, it will be attach together again
     public static String multipleCalc (String calculation) {
     	String answer = calculation;
     	int numOfOperator = operationChecker(calculation);
     	String calc1 = "";
-    	String calc2 = "";
+    	String rest = "";
     	if (numOfOperator >= 2) {
     	//cut the string so that the first string only has two values with one operator
-    	//and the rest part of the string stored in vol2.
+    	//and the rest part of the string stored in the variable rest.
     		calc1 = answer.substring(0, findPosition(answer," ",3));
-    		calc2 = answer.substring(findPosition(answer, " ",3));
+    		rest = answer.substring(findPosition(answer, " ",3));
     	} else {
     		calc1 = calculation;
     	}
     	String firstAnswer = calculateAnswer(calc1);
-    	String result = firstAnswer + calc2;
+    	String result = firstAnswer + rest;
     	return result;
 	}
     
+    //part of EC
     //Originated from multipleCalc
     //checks how many operators are in the calculation
     public static int operationChecker(String input) {
@@ -238,7 +240,7 @@ public class FracCalc {
     //method that does division
     public static int[] division(int[] frac1, int[] frac2) {
     	int [] result = new int [3];
-    	result [2]= frac1[2] * frac2[1];//denominator is multiplication of two denominators
+    	result [2]= frac1[2] * frac2[1];//denominator is multiplication of 1st denominator and 2nd numerator
     	result [1]= (frac1[1] * frac2[2]);
     	return result;
     }
@@ -264,7 +266,7 @@ public class FracCalc {
     
     //Calculates the greatest common factor of two integers
     public static int gcf(int numerator, int denominator) {
-    	int gcf = 1; // Set the initial value of gcf to 1 (the lowest possible gcf)
+    	int gcf = 1; // Set the initial value of gcf to 1, which is the lowest possible gcf
 		int count; // Set it to whichever number is larger.
     	if (numerator==denominator || numerator>denominator ) {
     		count = numerator;
