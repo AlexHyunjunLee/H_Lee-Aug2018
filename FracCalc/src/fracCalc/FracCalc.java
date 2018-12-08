@@ -22,7 +22,6 @@ public class FracCalc {
 				System.out.println(checkCondition(expression));
 			}
     	}
-    	System.out.println("¡Olé!");
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
