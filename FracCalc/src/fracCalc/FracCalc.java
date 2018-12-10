@@ -148,7 +148,7 @@ public class FracCalc {
         		num+=spaces;
         	}
     	}
-    	if (input.indexOf("/0")!=-1||input.indexOf("* 0/")!=-1&&result.equals("work")) {//("* 0/") part of EC (the order of operation)
+    	if (input.indexOf("/0")!=-1||input.indexOf("* 0/")!=-1&&result.equals("pass")) {//("* 0/") part of EC (the order of operation)
     		result = "ERROR: Cannot divide by zero";
     	}
     	return result;
