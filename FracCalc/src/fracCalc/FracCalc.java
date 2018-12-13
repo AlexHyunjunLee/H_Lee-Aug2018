@@ -16,10 +16,8 @@ public class FracCalc {
     		String expression = input.nextLine();
 			if (expression.equals("quit")) { 
 				done = true;
-			} else if(checkCondition(expression).equals("pass")) {
-				System.out.println(produceAnswer(expression));
 			} else {
-				System.out.println(checkCondition(expression));
+				System.out.println(produceAnswer(expression));
 			}
     	}
     }
@@ -35,12 +33,16 @@ public class FracCalc {
     public static String produceAnswer(String calculation) {
     	String answer = calculation;
     	boolean done = false;
-    	while (!done) {
-    		if (answer.contains(" ")) {//only 1 fraction without spaces left if the calculation is complete
-    			answer = multipleCalc(answer);
-    		} else {
-    			done = true;
+    	if(checkCondition(calculation).equals("pass")) {
+    		while (!done) {
+    			if (answer.contains(" ")) {//only 1 fraction without spaces left if the calculation is complete
+    				answer = multipleCalc(answer);
+    			} else {
+    				done = true;
+    			}
     		}
+    	} else {
+    		System.out.println(checkCondition(calculation));
     	}
     	return answer;
     }
@@ -209,8 +211,8 @@ public class FracCalc {
     		numerator = ((whole * denominator) + numerator);
     		numerator *= -1;
     	}
-    	int finalfrac[] = {0, numerator, denominator};
-    	return finalfrac;   	
+    	int finalFrac[] = {0, numerator, denominator};
+    	return finalFrac;
     }
     
     //method that does addition
@@ -232,7 +234,7 @@ public class FracCalc {
     //method that does multiplication
     public static int[] multiplication(int[] frac1, int[] frac2) {
     	int [] result = new int [3];
-    	result [2]= frac1[2] * frac2[2];//denominator is multiplication of two denominators
+    	result [2]= frac1[2] * frac2[2];
     	result [1]= (frac1[1] * frac2[1]);
     	return result;
     }
