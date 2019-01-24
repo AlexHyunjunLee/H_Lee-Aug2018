@@ -282,5 +282,4 @@ public class FracCalc {
 		}
 		return gcf;
     }
-    
 }
