@@ -9,12 +9,10 @@ public class Hobbit extends Traveler
 	private boolean ringObsessed = false;
 	
 	public Hobbit(String name) {
-		public Hobbit (String name, boolean ring) {
 			super(name);
-			this.ringObsessed = ring;
-		}
-		
 	}
+	
+	public void 
 	
 	
 	

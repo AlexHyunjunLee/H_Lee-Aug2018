@@ -7,10 +7,7 @@ public class Dwarf extends Traveler
 	
 	//Complete the constructor
 	public Dwarf(String name) {
-		public Dwarf (String name, boolean ring) {
-			super(name);
-			this.ringObsessed = ring;
-		}
+		super(name);
 	}
 
 	
