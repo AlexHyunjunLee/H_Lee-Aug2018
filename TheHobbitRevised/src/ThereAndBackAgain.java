@@ -13,7 +13,7 @@ public class ThereAndBackAgain
 		// Create a traveling party called party1 by creating an array of Travelers 
 		// and filling it with frodo, sam, and gimli
 		
-		Traveler[] party1 (frodo, sam, gimli);
+		Traveler[] party1 = {frodo, sam, gimli};
 		// Then, use a loop to make all travelers go a distance of 50 miles  
 		// Then, for each Traveler in the travelingParty, print their name and how far they've
 		//    traveled in miles.  (In the next piece, you'll do this in methods, but 
