@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/*This class contains the methods that are used for the Hobbit
+ * @author Alex Lee
+ * @versions February 12, 2019
+ */
+
 public class ThereAndBackAgain 
 {
 
@@ -8,8 +13,6 @@ public class ThereAndBackAgain
 		Hobbit frodo = new Hobbit("Frodo");
 		Hobbit sam = new Hobbit("Sam");
 		Dwarf gimli = new Dwarf("Gimli");
-		Wizard gandalf = new Wizard("Gandalf", "grey");
-		
 		// Create a traveling party called party1 by creating an array of Travelers 
 		// and filling it with frodo, sam, and gimli
 		Traveler[] party1 = {frodo, sam, gimli};
@@ -39,14 +42,36 @@ public class ThereAndBackAgain
 		"Oin", "Gloin", "Bifur", "Bofur", "Bombur", "Thorin"};
 
 		// Make a new ArrayList to hold a 2nd party of Travelers called party2:
+		// Make a new Hobbit called "Bilbo" and add him to party2
+		
+		ArrayList<Traveler> party2 = new ArrayList<Traveler>();
+		Hobbit Bilbo = new Hobbit("Bilbo");
+		party2.add(Bilbo);
+		// <Make a new Wizard called "Gandalf" and add him to party2.
 
-
-		// Call the createParty method and pass it party2 and the dwarfNames array.
-
-
+		Wizard Gandalf = new Wizard("Gandalf", "grey");
+		party2.add(Gandalf);
+	}
+		//write createParty
+		// Call the createParty method and pass it party2 and the dwarfNames array.		
+		// create party should add all the new dwarves to party2,
+		
+		public static void createParty(ArrayList<Traveler> party, String[] dwarves) {
+			for(int i=0;i<=dwarves.length;i++) {
+				Traveler names = new Traveler (dwarves[i]);
+				party.add(names);
+			}
+		}
+		
+		//Write allTravel
 		// Finally, call the allTravel method passing it party2 and 100 (representing
 		// the 100 miles that party2 has traveled together.
-	}
+
+		//Make sure your code prints out the name and distances party2 has traveled.
+		
+		public static void allTravel() {
+			
+		}
 
 	
 }
