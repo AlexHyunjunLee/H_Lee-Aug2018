@@ -22,7 +22,7 @@ public class ThereAndBackAgain
 		}
 		for(int i=0; i<party1.length;i++) {
 			System.out.println(party1[i].getName()+ " has traveled "+party1[i].getDistanceTraveled()+" miles");
-			}
+		}
 		// Then, for each Traveler in the travelingParty, print their name and how far they've
 		//    traveled in miles.  (In the next piece, you'll do this in methods, but 
 		//    for a first pass, just do it in main and print to the console.)
@@ -51,6 +51,8 @@ public class ThereAndBackAgain
 
 		Wizard Gandalf = new Wizard("Gandalf", "grey");
 		party2.add(Gandalf);
+		createParty(party2, dwarfNames);
+		allTravel(party2, 100);
 	}
 		//write createParty
 		// Call the createParty method and pass it party2 and the dwarfNames array.		
@@ -69,8 +71,10 @@ public class ThereAndBackAgain
 
 		//Make sure your code prints out the name and distances party2 has traveled.
 		
-		public static void allTravel() {
-			
+		public static void allTravel(ArrayList<Traveler> party, int miles) {
+			for(int i=0;i<=party.size();i++) {
+				party.get(i).travel(miles);
+			}
 		}
 
 	
