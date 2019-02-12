@@ -33,7 +33,19 @@ public class ThereAndBackAgain
 		
 		
 		System.out.println();
+		System.out.println("\n\n\nPART 2: \n");
 
+		String[] dwarfNames = {"Fili", "Kili", "Dori", "Ori", "Nori", "Balin", "Dwalin", 
+		"Oin", "Gloin", "Bifur", "Bofur", "Bombur", "Thorin"};
+
+		// Make a new ArrayList to hold a 2nd party of Travelers called party2:
+
+
+		// Call the createParty method and pass it party2 and the dwarfNames array.
+
+
+		// Finally, call the allTravel method passing it party2 and 100 (representing
+		// the 100 miles that party2 has traveled together.
 	}
 
 	
