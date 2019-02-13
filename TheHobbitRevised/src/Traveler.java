@@ -1,4 +1,7 @@
-
+/*This class is superclass where it contains field, constructor, and methods.
+ * @author Alex Lee
+ * @versions February 12, 2019
+ */
 public class Traveler 
 {
 	//fields

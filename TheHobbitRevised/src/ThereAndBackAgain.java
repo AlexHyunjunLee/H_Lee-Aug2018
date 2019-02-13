@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-/*This class contains the methods that are used to calculate the distances that Travelers traveled
+/*This class contains the client code that uses methods from other class to calculate the distances that Travelers traveled
  * @author Alex Lee
  * @versions February 12, 2019
  */

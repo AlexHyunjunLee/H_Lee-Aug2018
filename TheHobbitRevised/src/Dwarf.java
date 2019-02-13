@@ -1,3 +1,7 @@
+/*This class is subclass of Traveler where it contains only the constructor.
+ * @author Alex Lee
+ * @versions February 12, 2019
+ */
 public class Dwarf extends Traveler
 {
 	//Dwarves will need a constructor, but there's nothing new for them beyond

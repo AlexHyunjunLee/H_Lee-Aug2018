@@ -1,4 +1,7 @@
-
+/*This class is subclass of Traveler where it contains field, constructor, and methods.
+ * @author Alex Lee
+ * @versions February 12, 2019
+ */
 public class Wizard extends Traveler
 {
 	//Call Traveler's constructor (look it up p587) to set the name field and then 
