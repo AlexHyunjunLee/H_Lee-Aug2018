@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-/*This class contains the methods that are used for the Hobbit
+/*This class contains the methods that are used to calculate the distances that Travelers traveled
  * @author Alex Lee
  * @versions February 12, 2019
  */
@@ -17,7 +17,7 @@ public class ThereAndBackAgain
 		// and filling it with frodo, sam, and gimli
 		Traveler[] party1 = {frodo, sam, gimli};
 		// Then, use a loop to make all travelers go a distance of 50 miles  
-		for(int i=0; i<=party1.length;i++) {
+		for(int i=0; i<party1.length;i++) {
 			party1[i].travel(50);
 		}
 		for(int i=0; i<party1.length;i++) {
@@ -45,12 +45,12 @@ public class ThereAndBackAgain
 		// Make a new Hobbit called "Bilbo" and add him to party2
 		
 		ArrayList<Traveler> party2 = new ArrayList<Traveler>();
-		Hobbit Bilbo = new Hobbit("Bilbo");
-		party2.add(Bilbo);
+		Hobbit bilbo = new Hobbit("Bilbo");
+		party2.add(bilbo);
 		// <Make a new Wizard called "Gandalf" and add him to party2.
 
-		Wizard Gandalf = new Wizard("Gandalf", "grey");
-		party2.add(Gandalf);
+		Wizard gandalf = new Wizard("Gandalf", "grey");
+		party2.add(gandalf);
 		createParty(party2, dwarfNames);
 		allTravel(party2, 100);
 	}
@@ -59,8 +59,8 @@ public class ThereAndBackAgain
 		// create party should add all the new dwarves to party2,
 		
 		public static void createParty(ArrayList<Traveler> party, String[] dwarves) {
-			for(int i=0;i<=dwarves.length;i++) {
-				Traveler names = new Traveler (dwarves[i]);
+			for(int i=0;i<dwarves.length;i++) {
+				Dwarf names = new Dwarf (dwarves[i]);
 				party.add(names);
 			}
 		}
@@ -71,10 +71,12 @@ public class ThereAndBackAgain
 
 		//Make sure your code prints out the name and distances party2 has traveled.
 		
-		public static void allTravel(ArrayList<Traveler> party, int miles) {
-			for(int i=0;i<=party.size();i++) {
+		public static String allTravel(ArrayList<Traveler> party, int miles) {
+			for(int i=0;i<party.size();i++) {
 				party.get(i).travel(miles);
+				System.out.println(party.get(i).getName()+ " has traveled "+party.get(i).getDistanceTraveled()+" miles");
 			}
+			return "";
 		}
 
 	
