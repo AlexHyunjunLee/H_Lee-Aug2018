@@ -53,6 +53,9 @@ public class ThereAndBackAgain
 		party2.add(gandalf);
 		createParty(party2, dwarfNames);
 		allTravel(party2, 100);
+		for (int i=0;i<party2.size();i++) {
+			System.out.println(party2.get(i).getName()+ " has traveled "+party2.get(i).getDistanceTraveled()+" miles");
+		}
 	}
 		//write createParty
 		// Call the createParty method and pass it party2 and the dwarfNames array.		
@@ -71,12 +74,10 @@ public class ThereAndBackAgain
 
 		//Make sure your code prints out the name and distances party2 has traveled.
 		
-		public static String allTravel(ArrayList<Traveler> party, int miles) {
+		public static void allTravel(ArrayList<Traveler> party, int miles) {
 			for(int i=0;i<party.size();i++) {
 				party.get(i).travel(miles);
-				System.out.println(party.get(i).getName()+ " has traveled "+party.get(i).getDistanceTraveled()+" miles");
 			}
-			return "";
 		}
 
 	
