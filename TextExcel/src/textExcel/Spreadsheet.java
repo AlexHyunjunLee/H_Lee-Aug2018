@@ -4,7 +4,10 @@ package textExcel;
 
 public class Spreadsheet implements Grid
 {
-
+//constructor
+	public Spreadsheet() {
+		//initialize a 2D array of EmptyCells
+	}
 	@Override
 	public String processCommand(String command)
 	{
