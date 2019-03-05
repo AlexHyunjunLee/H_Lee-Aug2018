@@ -4,9 +4,6 @@ package textExcel;
 
 public class SpreadsheetLocation implements Location
 {
-	public SpreadsheetLocation(String cellName) {
-		// TODO: Fill in with your own code
-	}
     @Override
     public int getRow()
     {
