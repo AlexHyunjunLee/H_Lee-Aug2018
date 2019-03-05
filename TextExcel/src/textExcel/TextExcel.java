@@ -9,11 +9,11 @@ public class TextExcel {
 	public static void main(String[] args) {
 	    // Add your command loop here
 		Spreadsheet Mainspreadsheet = new Spreadsheet();
-	    Scanner userInput  = new Scanner (System.in);
+	    Scanner userInput = new Scanner (System.in);
 	    String input = "";
-	    while(!input.equals ("quit")) {
+	    while(!input.equalsIgnoreCase("quit")) {
 	    	input = Mainspreadsheet.processCommand(userInput.nextLine());
-	    		System.out.println(input);
+	    	System.out.println(input);
 	    }
 	}
 }
