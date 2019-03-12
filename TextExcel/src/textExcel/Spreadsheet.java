@@ -7,7 +7,7 @@ public class Spreadsheet implements Grid
 //constructor
 	private int numberOfRows = 20;
 	private int numberOfColumns = 12;
-	static Cell [][] spreadsheet = new Cell [21][13];
+	static Cell[][] spreadsheet = new Cell [21][13];
 	
 	public Spreadsheet() {
 		//initialize a 2D array of EmptyCells
@@ -51,6 +51,7 @@ public class Spreadsheet implements Grid
 	public String getGridText()
 	{
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
