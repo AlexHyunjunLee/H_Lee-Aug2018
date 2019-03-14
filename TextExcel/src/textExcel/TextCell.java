@@ -13,7 +13,7 @@ public class TextCell implements Cell {
 	@Override
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
-		String value = text.substring(1, text.length()-1);
+		String value = text.substring(0, text.length()-1);
 		value += "          ";
 		String abbrevText = value.substring(0, 9);
 		return abbrevText;

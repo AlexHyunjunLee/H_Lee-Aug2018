@@ -21,8 +21,13 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command)
 	{
 		// TODO Auto-generated method stub
-		int row, column;
-		String returnString = "";
+		// cell, clear, clear cell
+		int row = 0, column = 0;
+		String place = row + column +"";
+		Location cellPlace = new SpreadsheetLocation(place);
+		if (command.equals("clear cell")) {
+			
+		}
 		return "";
 	}
 
