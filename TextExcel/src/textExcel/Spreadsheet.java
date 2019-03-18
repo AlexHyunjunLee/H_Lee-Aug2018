@@ -22,8 +22,9 @@ public class Spreadsheet implements Grid
 	{
 		// TODO Auto-generated method stub
 		// cell, clear, clear cell
+		
 		int row = 0, column = 0;
-		String place = row + column +"";
+		String place = row +""+ column;
 		Location cellPlace = new SpreadsheetLocation(place);
 		if (command.equals("clear cell")) {
 			
