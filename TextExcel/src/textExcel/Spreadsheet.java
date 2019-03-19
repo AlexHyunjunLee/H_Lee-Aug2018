@@ -29,10 +29,8 @@ public class Spreadsheet implements Grid
 		if (command.contains("=")){
 			String[] data = command.split(" ", 3);
 			SpreadsheetLocation location = new SpreadsheetLocation(data[0]);
-			
-						TextCell cell = new TextCell(data[2]);
-						System.out.println(data[2] + " hello");
-						spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
+			TextCell cell = new TextCell(data[2]);
+			spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
 		}
 		if (command.length() <= 3 && command.length() != 0) {
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
@@ -54,6 +52,90 @@ public class Spreadsheet implements Grid
 		if (command.equals("")) {
 			return "";
 		}
+		return getGridText();
+	}
+
+	@Override
+	public int getRows()
+	{
+		// TODO Auto-generated method stub
+		return numberOfRows;
+	}
+
+	@Override
+	public int getCols()
+	{
+		// TODO Auto-generated method stub
+		return numberOfColumns;
+	}
+
+	@Override
+	public Cell getCell(Location loc)
+	{
+		// TODO Auto-generated method stub
+		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
+	}
+
+	@Override
+	public String getGridText()
+	{
+		// TODO Auto-generated method stub
+		String grid = "";
+		char colCount = 'A';
+		
+		for(int row = 0; row < 21; row++) {
+			for(int col = 0; col < 13; col++) {
+				if(row == 0) {
+					if(col == 0) {
+						grid += "   |";
+					} else {
+						grid += "" + colCount + "         |";
+						colCount++;	
+					}
+				}
+				else {
+					if (col == 0) {
+						if(row < 10) {
+							grid += "" + row + "  |";
+						} else {
+							grid += "" + row + " |";
+						}
+					} else {
+						String test = spreadsheet[row][col].abbreviatedCellText();
+						if(test.equals("")){
+							grid += "          |";
+						} else {
+							grid += test + "|";
+						}
+					}
+				
+				}
+			}	
+		grid += "\n";
+		}
+	return grid;
+	}
+
+	public boolean isNumeric(String input) {
+		String testString;
+		boolean returnValue = true;
+		if(input.charAt(0) == '-') {			
+			testString = input.substring(1);			
+		}
+		else {
+			testString = input;	
+		}
+	
+		for(int i = 0; i < testString.length(); i ++) {
+			if(testString.charAt(i) != '.') {
+				if(!Character.isDigit(testString.charAt(i))) {
+					return !returnValue;
+				}
+			}
+		}
+			return returnValue;
+	}
+	public void Hyun(String command) {
 		if (command.toLowerCase().contains("sorta")){
 			String[] data = command.split(" ", 2)[1].split("-");
 			SpreadsheetLocation starter = new SpreadsheetLocation(data[0]);
@@ -154,87 +236,5 @@ public class Spreadsheet implements Grid
 				}
 			}
 		}
-		return getGridText();
-	}
-
-	@Override
-	public int getRows()
-	{
-		// TODO Auto-generated method stub
-		return numberOfRows;
-	}
-
-	@Override
-	public int getCols()
-	{
-		// TODO Auto-generated method stub
-		return numberOfColumns;
-	}
-
-	@Override
-	public Cell getCell(Location loc)
-	{
-		// TODO Auto-generated method stub
-		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
-	}
-
-	@Override
-	public String getGridText()
-	{
-		// TODO Auto-generated method stub
-		String grid = "";
-		char colCount = 'A';
-		
-		for(int row = 0; row < 21; row++) {
-			for(int col = 0; col < 13; col++) {
-				if(row == 0) {
-					if(col == 0) {
-						grid += "   |";
-					} else {
-						grid += "" + colCount + "         |";
-						colCount++;	
-					}
-				}
-				else {
-					if (col == 0) {
-						if(row < 10) {
-							grid += "" + row + "  |";
-						} else {
-							grid += "" + row + " |";
-						}
-					} else {
-						String test = spreadsheet[row][col].abbreviatedCellText();
-						if(test.equals("")){
-							grid += "          |";
-						} else {
-							grid += test + "|";
-						}
-					}
-				
-				}
-			}	
-		grid += "\n";
-		}
-	return grid;
-	}
-
-	public boolean isNumeric(String input) {
-		String testString;
-		boolean returnValue = true;
-		if(input.charAt(0) == '-') {			
-			testString = input.substring(1);			
-		}
-		else {
-			testString = input;	
-		}
-	
-		for(int i = 0; i < testString.length(); i ++) {
-			if(testString.charAt(i) != '.') {
-				if(!Character.isDigit(testString.charAt(i))) {
-					return !returnValue;
-				}
-			}
-		}
-			return returnValue;
 	}
 }
