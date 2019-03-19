@@ -8,6 +8,8 @@ import java.io.*;
 public class TextExcel {
 	public static void main(String[] args) {
 	    // Add your command loop here
+		Spreadsheet grid = new Spreadsheet();
+		System.out.println(grid.getGridText());
 		Spreadsheet Mainspreadsheet = new Spreadsheet();
 	    Scanner userInput = new Scanner (System.in);
 	    String input = "";
