@@ -1,9 +1,9 @@
 package textExcel;
 
 public class ValueCell extends RealCell {
-	private String value;
-	public ValueCell(String valueInput) {
-		super(valueInput);
+	private double value;
+	public ValueCell(double valueInput) {
+		super("" + valueInput);
 		value = valueInput;
 	}
 	// text for spreadsheet cell display, must be exactly length 10
