@@ -1,7 +1,10 @@
 package textExcel;
 
 public class ValueCell extends RealCell {
-	public ValueCell() {
+	private String value;
+	public ValueCell(String valueInput) {
+		super(valueInput);
+		value = valueInput;
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {

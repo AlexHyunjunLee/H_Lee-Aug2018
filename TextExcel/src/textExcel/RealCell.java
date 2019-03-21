@@ -12,13 +12,14 @@ public class RealCell implements Cell {
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
 		String stringcell = cell;
+		stringcell += "          ";
 		return stringcell;
 	}
 
 	@Override
 	public String fullCellText() {
 		// TODO Auto-generated method stub
-		return null;
+		return null;           
 	}
 
 }

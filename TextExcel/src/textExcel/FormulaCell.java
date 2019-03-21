@@ -1,7 +1,10 @@
 package textExcel;
 
 public class FormulaCell extends RealCell {
-	public FormulaCell() {
+	private String formula;
+	public FormulaCell(String input) {
+		super(input);
+		formula = input;
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
