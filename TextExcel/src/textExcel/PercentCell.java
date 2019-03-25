@@ -8,10 +8,18 @@ public class PercentCell extends RealCell {
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
-		return "          ";
+		String abbrevPercent = percent;
+		int count = abbrevPercent.length();
+		if(count> 10) {
+			abbrevPercent = percent.substring(0,8);
+			abbrevPercent += "%";
+		}
+		return abbrevPercent;
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {
-		return "";
+		double cellContents = Double.parseDouble(percent.substring(0, percent.length()-2));
+		cellContents /= 100;
+		return cellContents + "";
 	}
 }
