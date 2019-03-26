@@ -45,9 +45,7 @@ public class Spreadsheet implements Grid
 				for(int i = 0; i < 21; i++) {
 					for(int j = 0; j < 13; j++) {
 						spreadsheet [i][j] = new EmptyCell();
-					}
-				}
-			}
+			}}}
 		}
 		if (command.equals("")) {
 			return "";
