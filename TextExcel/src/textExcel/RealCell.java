@@ -11,19 +11,29 @@ public class RealCell implements Cell {
 	@Override
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
-		String stringcell = getDoubleValue()+"";
-		stringcell += "          ";
-		return stringcell.substring(0, 9);
+		String newCellContents = cell;
+		if(cell.length() > 10) {
+			return(cell.substring(0, 10));
+		}
+		else {
+			for(int i = 0; i < 10 - cell.length(); i++) {
+				newCellContents += " ";
+			}
+			return newCellContents;
+		}
 	}
 
-	private double getDoubleValue() {
+	public double getDoubleValue() {
 		return Double.parseDouble(cell);
 	}
-
 	@Override
 	public String fullCellText() {
 		// TODO Auto-generated method stub
-		return cell;           
+		String newCellContents = cell;
+		return newCellContents;          
+	}
+	public String getUserInput() {
+		return cell;
 	}
 
 }
