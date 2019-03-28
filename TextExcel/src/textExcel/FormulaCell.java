@@ -12,16 +12,18 @@ public class FormulaCell extends RealCell {
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
 		String cellContents = "" + this.getDoubleValue();
-		String returnString = cellContents;
 		if(cellContents.length() > 10) {
 			return(cellContents.substring(0, 10));
 		}
 		else {
-			for(int i = 0; i < 10 - cellContents.length(); i++) {
-				returnString += " ";
-			}
-			return returnString;
+			cellContents += "          ";
+			return(cellContents.substring(0, 10));
 		}
+	}
+	// text for individual cell inspection, not truncated or padded
+	public String fullCellText() {
+		String returnString = "" + this.getDoubleValue();
+		return returnString;
 	}
 	public double getDoubleValue() {
 		String [] arr = getUserInput().substring(2, getUserInput().length()-2).split(" ");

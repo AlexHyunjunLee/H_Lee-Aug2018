@@ -16,11 +16,8 @@ public class PercentCell extends RealCell {
 			percent = getUserInput();
 		}
 		percent += "%";
-		String returnString = percent;
-		for(int i = 0; i < 10 - percent.length(); i++) {
-			returnString += " ";
-		}
-		return returnString;
+		percent += "          ";
+		return(percent.substring(0, 10));
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {

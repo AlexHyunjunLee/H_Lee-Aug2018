@@ -13,16 +13,13 @@ public class RealCell implements Cell {
 	
 	@Override
 	public String abbreviatedCellText() {
-		// TODO Auto-generated method stub
 		String newCellContents = cell;
 		if(cell.length() > 10) {
 			return(cell.substring(0, 10));
 		}
 		else {
-			for(int i = 0; i < 10 - cell.length(); i++) {
-				newCellContents += " ";
-			}
-			return newCellContents;
+			newCellContents += "          ";
+			return (newCellContents.substring(0, 10));
 		}
 	}
 

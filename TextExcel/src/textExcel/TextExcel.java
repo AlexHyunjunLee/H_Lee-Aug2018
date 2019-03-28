@@ -16,7 +16,7 @@ public class TextExcel {
 		Spreadsheet Mainspreadsheet = new Spreadsheet();
 	    Scanner userInput = new Scanner (System.in);
 	    String input = "";
-	    while(!input.equals ("quit")) {
+	    while(!input.equals("quit")) {
 	    	input = Mainspreadsheet.processCommand(userInput.nextLine());
 	    		System.out.println(input);
 	    }
