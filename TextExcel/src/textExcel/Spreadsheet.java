@@ -25,7 +25,6 @@ public class Spreadsheet implements Grid
 	@Override
 	public String processCommand(String command)
 	{
-		// TODO Auto-generated method stub
 		// cell, clear, clear cell
 		int row, column;
 		String returnString = "";
