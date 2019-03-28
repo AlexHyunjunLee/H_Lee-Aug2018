@@ -1,3 +1,6 @@
+// @author Alex Lee
+// @version March 19, 2019
+
 package textExcel;
 
 public class PercentCell extends RealCell {
