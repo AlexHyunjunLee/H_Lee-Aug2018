@@ -9,21 +9,17 @@ public class ValueCell extends RealCell {
 	}
 	//Returns the contents of a value cell truncated to ten spaces
 	public String abbreviatedCellText() {
-		double doubleValue = this.getDoubleValue();
-		String value = "" + doubleValue;
-		String newValue = value;
+		String value = "" + this.getDoubleValue();
 		if(value.length() > 10) {
 			return(value.substring(0, 10));
 		} else {
-			for(int i = 0; i < 10 - value.length(); i++) {
-				newValue += " ";
-			}
+			value += "          ";
+			return (value.substring(0, 10));
 		}
-		return newValue;
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {
-		String initial = getUserInput();
-		return initial;
+		String text = getUserInput();
+		return text;
 	}
 }

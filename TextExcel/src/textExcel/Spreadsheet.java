@@ -42,7 +42,7 @@ public class Spreadsheet implements Grid	{
 						return getGridText();
 					} else {//needs to be fixed
 						TextCell cell = new TextCell(data[2]);
-						System.out.println(data[2] + " hello");
+						System.out.println(data[2]);
 						spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
 					}
 				}

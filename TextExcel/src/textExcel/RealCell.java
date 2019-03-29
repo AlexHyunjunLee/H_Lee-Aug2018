@@ -10,8 +10,6 @@ public class RealCell implements Cell {
 	public RealCell(String input) {
 		this.cell = input;
 	}
-	
-	@Override
 	public String abbreviatedCellText() {
 		String newCellContents = cell;
 		if(cell.length() > 10) {

@@ -9,8 +9,6 @@ public class TextCell implements Cell {
 	public TextCell(String text) {
 		this.text = text;
 	}
-	
-	@Override
 	public String abbreviatedCellText() {
 		// TODO Auto-generated method stub
 		String newCellContents = text;

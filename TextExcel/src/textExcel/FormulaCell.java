@@ -74,24 +74,24 @@ public class FormulaCell extends RealCell {
 						value2 = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
 					}
 				}
-					if(arr[i+1].equals("+")) {
-						value += value2;
+				if(arr[i+1].equals("+")) {
+					value += value2;
+				}
+				else {
+					if(arr[i+1].equals("-")) {
+						value -= value2;
 					}
 					else {
-						if(arr[i+1].equals("-")) {
-							value -= value2;
+						if(arr[i+1].equals("*")) {
+							value *= value2;
 						}
 						else {
-							if(arr[i+1].equals("*")) {
-								value *= value2;
+							if(arr[i+1].equals("/")) {
+								value /= value2;
 							}
-							else {
-								if(arr[i+1].equals("/")) {
-									value /= value2;
-								}
-							}
-						}	
-					}
+						}
+					}	
+				}
 			}
 		}
 		return value;
