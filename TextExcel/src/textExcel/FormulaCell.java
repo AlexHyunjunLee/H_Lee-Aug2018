@@ -19,11 +19,7 @@ public class FormulaCell extends RealCell {
 			return(cellContents.substring(0, 10));
 		}
 	}
-	// text for individual cell inspection, not truncated or padded
-	public String fullCellText() {
-		String returnString = "" + this.getDoubleValue();
-		return returnString;
-	}
+	//Evaluates the formula of a formula cell
 	public double getDoubleValue() {
 		String [] arr = getUserInput().substring(2, getUserInput().length()-2).split(" ");
 		double value = 0.0;	
@@ -100,6 +96,7 @@ public class FormulaCell extends RealCell {
 		}
 		return value;
 	}
+	//Tests if a string is numeric (only containing numbers, a '.', or a '-')
 	public boolean isNumeric(String input) {
 		String testString;
 		boolean returnValue = true;

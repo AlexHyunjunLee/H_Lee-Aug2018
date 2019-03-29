@@ -1,49 +1,51 @@
 // @author Alex Lee
 // @version March 4, 2019
-
 package textExcel;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 // Update this file with your own code.
 
-public class Spreadsheet implements Grid
-{
-//constructor
+public class Spreadsheet implements Grid	{
 	private int numberOfRows = 20;
 	private int numberOfColumns = 12;
-	static Cell[][] spreadsheet = new Cell [21][13];
-	
+	static Cell [][] spreadsheet = new Cell [21][13];
+
 	public Spreadsheet() {
-		//initialize a 2D array of EmptyCells
 		for(int i = 0; i < 21; i++) {
 			for(int j = 0; j < 13; j++) {
-				spreadsheet[i][j] = new EmptyCell();
+				spreadsheet [i][j] = new EmptyCell();
 			}
 		}
 	}
-	@Override
-	public String processCommand(String command)
-	{
-		// cell, clear, clear cell
+	
+	public String processCommand(String command)	{
 		int row, column;
 		String returnString = "";
 		if (command.contains("=")){
 			String[] data = command.split(" ", 3);
 			SpreadsheetLocation location = new SpreadsheetLocation(data[0]);
-			if (data[2].contains("%")) {
-				PercentCell percentCell = new PercentCell(data[2]);
-				spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
-				return getGridText();
-			} else if(isNumeric(data[2])) {
+			if (isNumeric(data[2])) {
 				ValueCell valueCell = new ValueCell(data[2]);
 				spreadsheet[location.getRow() + 1][location.getCol() + 1] = valueCell;	
 				return getGridText();
 			} else {
-				TextCell cell = new TextCell(data[2]);
-				spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
-				return getGridText();
+				if (data[2].contains("%")) {
+					PercentCell percentCell = new PercentCell(data[2]);
+					spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
+					return getGridText();
+				} else { 
+					if(data[2].substring(0,1).equals("(") && (command.contains("+") || command.contains("-") || command.contains("*") || command.contains("/") || command.substring(command.length()-1).equals(")"))) {
+						FormulaCell formulaCell = new FormulaCell(data[2]);
+						spreadsheet[location.getRow() + 1][location.getCol() + 1] = formulaCell;
+						return getGridText();
+					} else {//needs to be fixed
+						TextCell cell = new TextCell(data[2]);
+						System.out.println(data[2] + " hello");
+						spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
+					}
+				}
 			}
 		}
 		if (command.length() <= 3 && command.length() != 0) {
@@ -59,7 +61,9 @@ public class Spreadsheet implements Grid
 				for(int i = 0; i < 21; i++) {
 					for(int j = 0; j < 13; j++) {
 						spreadsheet [i][j] = new EmptyCell();
-			}}}
+					}
+				}
+			}
 		}
 		if (command.equals("")) {
 			return "";
@@ -67,31 +71,23 @@ public class Spreadsheet implements Grid
 		return getGridText();
 	}
 
-	@Override
-	public int getRows()
-	{
-		// TODO Auto-generated method stub
+	//Returns the number of rows in the spreadsheet
+	public int getRows() {
 		return numberOfRows;
 	}
 
-	@Override
-	public int getCols()
-	{
-		// TODO Auto-generated method stub
+	//Returns the number of columns in the spreadsheet
+	public int getCols() {
 		return numberOfColumns;
 	}
 
-	@Override
 	public Cell getCell(Location loc)
 	{
-		// TODO Auto-generated method stub
 		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
 	}
 
-	@Override
-	public String getGridText()
-	{
-		// TODO Auto-generated method stub
+	//Returns the entire spreadsheet
+	public String getGridText() {
 		String grid = "";
 		char colCount = 'A';
 		
@@ -144,7 +140,6 @@ public class Spreadsheet implements Grid
 				}
 			}
 		}
-		System.out.println("yo");
-		return returnValue;
+			return returnValue;
 	}
 }
