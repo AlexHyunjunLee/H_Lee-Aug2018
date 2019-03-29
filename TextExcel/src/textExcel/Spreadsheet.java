@@ -5,6 +5,7 @@ package textExcel;
 
 import java.util.ArrayList;
 
+
 // Update this file with your own code.
 
 public class Spreadsheet implements Grid
@@ -31,8 +32,19 @@ public class Spreadsheet implements Grid
 		if (command.contains("=")){
 			String[] data = command.split(" ", 3);
 			SpreadsheetLocation location = new SpreadsheetLocation(data[0]);
-			TextCell cell = new TextCell(data[2]);
-			spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
+			if (data[2].contains("%")) {
+				PercentCell percentCell = new PercentCell(data[2]);
+				spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
+				return getGridText();
+			} else if(isNumeric(data[2])) {
+				ValueCell valueCell = new ValueCell(data[2]);
+				spreadsheet[location.getRow() + 1][location.getCol() + 1] = valueCell;	
+				return getGridText();
+			} else {
+				TextCell cell = new TextCell(data[2]);
+				spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
+				return getGridText();
+			}
 		}
 		if (command.length() <= 3 && command.length() != 0) {
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
@@ -114,5 +126,25 @@ public class Spreadsheet implements Grid
 		grid += "\n";
 		}
 	return grid;
+	}
+	public boolean isNumeric(String input) {
+		String testString;
+		boolean returnValue = true;
+		if(input.charAt(0) == '-') {			
+			testString = input.substring(1);			
+		}
+		else {
+			testString = input;	
+		}
+	
+		for(int i = 0; i < testString.length(); i ++) {
+			if(testString.charAt(i) != '.') {
+				if(!Character.isDigit(testString.charAt(i))) {
+					return !returnValue;
+				}
+			}
+		}
+		System.out.println("yo");
+		return returnValue;
 	}
 }

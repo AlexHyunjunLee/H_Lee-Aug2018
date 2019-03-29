@@ -20,10 +20,11 @@ public class PercentCell extends RealCell {
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {
-		String returnString = "" + this.getDoubleValue();
+		String initial = getUserInput();
+		String returnString = "" + getDoubleValue(initial);
 		return returnString;
 	}
-	public double getDoubleValue() {
-		return (Double.parseDouble(fullCellText().substring(0, fullCellText().indexOf("%")))/100);
+	public double getDoubleValue(String input) {
+		return (Double.parseDouble(input.substring(0, input.indexOf("%")))/100);
 	}
 }

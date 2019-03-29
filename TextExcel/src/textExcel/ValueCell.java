@@ -11,6 +11,14 @@ public class ValueCell extends RealCell {
 	public String abbreviatedCellText() {
 		double doubleValue = this.getDoubleValue();
 		String value = "" + doubleValue;
+		if(value.substring(value.indexOf(".")+1).contains("0")){
+			boolean checkpoint = false;
+			while(!checkpoint) {
+				if(value.substring(value.length()-1).equals("0")){
+					value=value.substring(0,value.length()-1);
+				}
+			}
+		}
 		if(value.length() > 10) {
 			return(value.substring(0, 10));
 		} else {
@@ -20,10 +28,7 @@ public class ValueCell extends RealCell {
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {
-		String returnString = "" + this.getDoubleValue();
-		return returnString;
-	}
-	public double getDoubleValue() {
-		return (Double.parseDouble(fullCellText()));
+		String initial = getUserInput();
+		return initial;
 	}
 }
