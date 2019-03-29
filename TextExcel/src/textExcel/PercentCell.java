@@ -27,4 +27,5 @@ public class PercentCell extends RealCell {
 	public double getDoubleValue(String input) {
 		return (Double.parseDouble(input.substring(0, input.indexOf("%")))/100);
 	}
+	
 }
