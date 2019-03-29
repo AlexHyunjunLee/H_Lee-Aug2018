@@ -15,8 +15,7 @@ public class PercentCell extends RealCell {
 		} else {
 			percent = getUserInput();
 		}
-		percent += "%";
-		percent += "          ";
+		percent += "%          ";
 		return(percent.substring(0, 10));
 	}
 	// text for individual cell inspection, not truncated or padded
