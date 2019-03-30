@@ -5,6 +5,7 @@ package textExcel;
 
 public class FormulaCell extends RealCell {
 	Cell [][] newSpreadsheet = Spreadsheet.spreadsheet;
+	//constructor
 	public FormulaCell(String input) {
 		super(input);
 	}
@@ -15,14 +16,14 @@ public class FormulaCell extends RealCell {
 			return(cellContents.substring(0, 10));
 		}
 		else {
-			cellContents += "          ";
+			cellContents += "          ";//adds 10 spaces in order to fill up the needed part
 			return(cellContents.substring(0, 10));
 		}
 	}
-	//Evaluates the formula of a formula cell
+	//calculates the formula of a formula cell
 	public double getDoubleValue() {
 		String [] arr = getUserInput().substring(2, getUserInput().length()-2).split(" ");
-		double value = 0.0;	
+		double value = 0.0;
 		double valueForCalc = 0.0;
 		if(arr[0].toLowerCase().equals("sum") || arr[0].toLowerCase().equals("avg")) {
 			int count = 0;
@@ -43,7 +44,7 @@ public class FormulaCell extends RealCell {
 					count ++;
 				}
 			}
-			avg = value/count;
+			avg = value/count;//average 
 			if(arr[0].toLowerCase().equals("avg") && count > 1) {
 				value = avg;
 			}
@@ -74,19 +75,19 @@ public class FormulaCell extends RealCell {
 						valueForCalc = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
 					}
 				}
-				if(arr[i+1].equals("+")) {
+				if(arr[i+1].equals("+")) {//if it is addition
 					value += valueForCalc;
 				}
 				else {
-					if(arr[i+1].equals("-")) {
+					if(arr[i+1].equals("-")) {//if it is subtraction
 						value -= valueForCalc;
 					}
 					else {
-						if(arr[i+1].equals("*")) {
+						if(arr[i+1].equals("*")) {//if it is multiplication
 							value *= valueForCalc;
 						}
 						else {
-							if(arr[i+1].equals("/")) {
+							if(arr[i+1].equals("/")) {//if it is division
 								value /= valueForCalc;
 							}
 						}
@@ -96,19 +97,19 @@ public class FormulaCell extends RealCell {
 		}
 		return value;
 	}
-	//Tests if a string is numeric (only containing numbers, a ".", or a "-")
+	//Tests if a string is numeric (only containing number, a '.', or a '-')
 	public boolean isNumeric(String input) {
-		String testString;
+		String testedValue;
 		boolean returnValue = true;
-		if(input.charAt(0) == '-') {			
-			testString = input.substring(1);			
+		if(input.charAt(0) == '-') {//if it has the negative sign		
+			testedValue = input.substring(1);			
 		}
 		else {
-			testString = input;	
+			testedValue = input;	
 		}
-		for(int i=0; i<testString.length(); i++) {
-			if(testString.charAt(i) != '.') {
-				if(!Character.isDigit(testString.charAt(i))) {
+		for(int i=0; i<testedValue.length(); i++) {
+			if(testedValue.charAt(i) != '.') {//if it doesn't have the decimal point, it checks for that value
+				if(!Character.isDigit(testedValue.charAt(i))) {//if it is number, it is true, but if it is letter, it returns false
 					return !returnValue;
 				}
 			}

@@ -10,7 +10,7 @@ public class Spreadsheet implements Grid	{
 	private int numberOfRows = 20;
 	private int numberOfColumns = 12;
 	static Cell [][] spreadsheet = new Cell [21][13];
-
+	//constructor - puts empty cells initially
 	public Spreadsheet() {
 		for(int i = 0; i < 21; i++) {
 			for(int j = 0; j < 13; j++) {
@@ -18,30 +18,30 @@ public class Spreadsheet implements Grid	{
 			}
 		}
 	}
-	
+	//method used to command changes in the spreadsheet
 	public String processCommand(String command)	{
-		if (command.contains("=")){
+		if (command.contains("=")){//if it is assigning values into the cell
 			String[] data = command.split(" ", 3);
 			SpreadsheetLocation location = new SpreadsheetLocation(data[0]);
-			if (isNumeric(data[2])) {
+			if (isNumeric(data[2])) {//if it is value cell
 				ValueCell valueCell = new ValueCell(data[2]);
 				spreadsheet[location.getRow() + 1][location.getCol() + 1] = valueCell;	
 				return getGridText();
-			} else if (data[2].contains("%")) {
+			} else if (data[2].contains("%")) {//if it is percent cell
 					PercentCell percentCell = new PercentCell(data[2]);
 					spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
 					return getGridText();
 			} else if(data[2].substring(0,1).equals("(") && (command.contains("+") || command.contains("-") || command.contains("*") || command.contains("/") || command.substring(command.length()-1).equals(")"))) {
-					FormulaCell formulaCell = new FormulaCell(data[2]);
+					FormulaCell formulaCell = new FormulaCell(data[2]);//if it is formula cell
 					spreadsheet[location.getRow() + 1][location.getCol() + 1] = formulaCell;
 					return getGridText();
-			} else {
+			} else {//if it is not value, formula, or percent, it has to be text cell
 					TextCell cell = new TextCell(data[2]);
 					System.out.println(data[2]);
 					spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
 			}
 		}
-		if (command.length() <= 3 && command.length() != 0) {
+		if (command.length() <= 3 && command.length() != 0) {//if it is less than or equal to length of 3, it is definitely asking for the full cell text of that cell
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
 			return spreadsheet [location.getRow()+1][location.getCol()+1].fullCellText();
 		}
@@ -50,7 +50,7 @@ public class Spreadsheet implements Grid	{
 			SpreadsheetLocation location = new SpreadsheetLocation(splitInput[1]);
 			spreadsheet[location.getRow() + 1][location.getCol() + 1] = new EmptyCell();
 		} else { 
-			if (command.toLowerCase().equals("clear")) {
+			if (command.toLowerCase().equals("clear")) {//if the command is just clear, it clears entire spreadsheet
 				for(int i = 0; i < 21; i++) {
 					for(int j = 0; j < 13; j++) {
 						spreadsheet [i][j] = new EmptyCell();
@@ -73,7 +73,7 @@ public class Spreadsheet implements Grid	{
 	public int getCols() {
 		return numberOfColumns;
 	}
-
+	//returns the cell from the desired location
 	public Cell getCell(Location loc)
 	{
 		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
@@ -101,11 +101,11 @@ public class Spreadsheet implements Grid	{
 							grid += "" + row + " |";
 						}
 					} else {
-						String test = spreadsheet[row][col].abbreviatedCellText();
-						if(test.equals("")){
+						String cell = spreadsheet[row][col].abbreviatedCellText();//fill in with the abbreviated values
+						if(cell.equals("")){
 							grid += "          |";
 						} else {
-							grid += test + "|";
+							grid += cell + "|";
 						}
 					}
 				
@@ -115,18 +115,19 @@ public class Spreadsheet implements Grid	{
 		}
 		return grid;
 	}
+	//Tests if a string is numeric (only containing number, a '.', or a '-')
 	public boolean isNumeric(String input) {
-		String testString;
+		String testedValue;
 		boolean returnValue = true;
-		if(input.charAt(0) == '-') {			
-			testString = input.substring(1);			
+		if(input.charAt(0) == '-') {//if it has the negative sign		
+			testedValue = input.substring(1);			
 		}
 		else {
-			testString = input;	
+			testedValue = input;	
 		}
-		for(int i=0; i<testString.length(); i++) {
-			if(testString.charAt(i) != '.') {
-				if(!Character.isDigit(testString.charAt(i))) {
+		for(int i=0; i<testedValue.length(); i++) {
+			if(testedValue.charAt(i) != '.') {//if it doesn't have the decimal point, it checks for that value
+				if(!Character.isDigit(testedValue.charAt(i))) {//if it is number, it is true, but if it is letter, it returns false
 					return !returnValue;
 				}
 			}

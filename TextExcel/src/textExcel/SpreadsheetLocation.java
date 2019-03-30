@@ -9,12 +9,12 @@ public class SpreadsheetLocation implements Location
 {
 	private int columnNumber;
 	private int rowNumber;
-	
+	//get row
     public int getRow()
     {
     	return rowNumber;
     }
-
+    //get column
     public int getCol()
     {
     	return columnNumber;
@@ -27,7 +27,7 @@ public class SpreadsheetLocation implements Location
     	rowNumber = ParseInt(cellName.substring(1)) - 1;
     }
     //returns the input as the integer value
-    private int ParseInt(String substring) {
-		return Integer.valueOf(substring);
+    private int ParseInt(String input) {
+		return Integer.valueOf(input);
 	}
 }
