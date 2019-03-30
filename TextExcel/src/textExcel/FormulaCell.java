@@ -29,10 +29,10 @@ public class FormulaCell extends RealCell {
 			int count = 0;
 			double avg = 0.0;
 			String [] arr2 = arr[1].split("-");
-			SpreadsheetLocation startCell = new SpreadsheetLocation(arr2[0]);
+			SpreadsheetLocation firstCell = new SpreadsheetLocation(arr2[0]);
 			SpreadsheetLocation lastCell = new SpreadsheetLocation(arr2[1]);
-			int startRow = startCell.getRow() + 1;
-			int startCol = startCell.getCol() + 1;
+			int startRow = firstCell.getRow() + 1;
+			int startCol = firstCell.getCol() + 1;
 			for(int row = startRow; row <= lastCell.getRow() + 1; row++) {
 				for(int col = startCol; col <= lastCell.getCol() + 1; col++) {
 					if(newSpreadsheet[row][col] instanceof FormulaCell) {
