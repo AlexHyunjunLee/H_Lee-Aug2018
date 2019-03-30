@@ -10,7 +10,6 @@ public class TextCell implements Cell {
 		this.text = text;
 	}
 	public String abbreviatedCellText() {
-		// TODO Auto-generated method stub
 		String newCellContents = text;
 		if (text.contains("\"")){
 			newCellContents = text.substring(1, text.length()-1);
@@ -23,10 +22,7 @@ public class TextCell implements Cell {
 			return (newCellContents.substring(0, 10));
 		}
 	}
-
-	@Override
 	public String fullCellText() {
-		// TODO Auto-generated method stub
 		return text;
 	}
 	public void setContents(String newContents){

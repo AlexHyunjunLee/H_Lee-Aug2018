@@ -3,12 +3,9 @@
 
 package textExcel;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import textExcel.TestsALL.TestLocation;
-
-import java.io.*;
 
 public class TextExcel {
 	public static void main(String[] args) {

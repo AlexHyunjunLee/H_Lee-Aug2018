@@ -24,9 +24,7 @@ public class RealCell implements Cell {
 	public double getDoubleValue() {
 		return Double.parseDouble(cell);
 	}
-	@Override
 	public String fullCellText() {
-		// TODO Auto-generated method stub
 		String newCellContents = cell;
 		return newCellContents;          
 	}

@@ -96,7 +96,7 @@ public class FormulaCell extends RealCell {
 		}
 		return value;
 	}
-	//Tests if a string is numeric (only containing numbers, a '.', or a '-')
+	//Tests if a string is numeric (only containing numbers, a ".", or a "-")
 	public boolean isNumeric(String input) {
 		String testString;
 		boolean returnValue = true;
@@ -106,14 +106,13 @@ public class FormulaCell extends RealCell {
 		else {
 			testString = input;	
 		}
-	
-		for(int i = 0; i < testString.length(); i ++) {
+		for(int i=0; i<testString.length(); i++) {
 			if(testString.charAt(i) != '.') {
 				if(!Character.isDigit(testString.charAt(i))) {
 					return !returnValue;
 				}
 			}
 		}
-			return returnValue;
+		return returnValue;
 	}
 }

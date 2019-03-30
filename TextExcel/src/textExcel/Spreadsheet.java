@@ -2,8 +2,6 @@
 // @version March 4, 2019
 package textExcel;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 // Update this file with your own code.
 
@@ -21,8 +19,6 @@ public class Spreadsheet implements Grid	{
 	}
 	
 	public String processCommand(String command)	{
-		int row, column;
-		String returnString = "";
 		if (command.contains("=")){
 			String[] data = command.split(" ", 3);
 			SpreadsheetLocation location = new SpreadsheetLocation(data[0]);
@@ -30,31 +26,27 @@ public class Spreadsheet implements Grid	{
 				ValueCell valueCell = new ValueCell(data[2]);
 				spreadsheet[location.getRow() + 1][location.getCol() + 1] = valueCell;	
 				return getGridText();
-			} else {
-				if (data[2].contains("%")) {
+			} else if (data[2].contains("%")) {
 					PercentCell percentCell = new PercentCell(data[2]);
 					spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
 					return getGridText();
-				} else { 
-					if(data[2].substring(0,1).equals("(") && (command.contains("+") || command.contains("-") || command.contains("*") || command.contains("/") || command.substring(command.length()-1).equals(")"))) {
-						FormulaCell formulaCell = new FormulaCell(data[2]);
-						spreadsheet[location.getRow() + 1][location.getCol() + 1] = formulaCell;
-						return getGridText();
-					} else {//needs to be fixed
-						TextCell cell = new TextCell(data[2]);
-						System.out.println(data[2]);
-						spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
-					}
-				}
+			} else if(data[2].substring(0,1).equals("(") && (command.contains("+") || command.contains("-") || command.contains("*") || command.contains("/") || command.substring(command.length()-1).equals(")"))) {
+					FormulaCell formulaCell = new FormulaCell(data[2]);
+					spreadsheet[location.getRow() + 1][location.getCol() + 1] = formulaCell;
+					return getGridText();
+			} else {
+					TextCell cell = new TextCell(data[2]);
+					System.out.println(data[2]);
+					spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
 			}
 		}
 		if (command.length() <= 3 && command.length() != 0) {
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
 			return spreadsheet [location.getRow()+1][location.getCol()+1].fullCellText();
 		}
-		if (command.toLowerCase().contains("clear ")) {
-			String [] splitInput2 = command.split(" ", 2);
-			SpreadsheetLocation location = new SpreadsheetLocation(splitInput2[1]);
+		if (command.toLowerCase().contains("clear ")) {//if the command is to clear certain cell, it just replace the cell with empty cell
+			String [] splitInput = command.split(" ", 2);
+			SpreadsheetLocation location = new SpreadsheetLocation(splitInput[1]);
 			spreadsheet[location.getRow() + 1][location.getCol() + 1] = new EmptyCell();
 		} else { 
 			if (command.toLowerCase().equals("clear")) {
@@ -90,7 +82,6 @@ public class Spreadsheet implements Grid	{
 	public String getGridText() {
 		String grid = "";
 		char colCount = 'A';
-		
 		for(int row = 0; row < 21; row++) {
 			for(int col = 0; col < 13; col++) {
 				if(row == 0) {
@@ -121,7 +112,7 @@ public class Spreadsheet implements Grid	{
 			}	
 		grid += "\n";
 		}
-	return grid;
+		return grid;
 	}
 	public boolean isNumeric(String input) {
 		String testString;
@@ -132,14 +123,13 @@ public class Spreadsheet implements Grid	{
 		else {
 			testString = input;	
 		}
-	
-		for(int i = 0; i < testString.length(); i ++) {
+		for(int i=0; i<testString.length(); i++) {
 			if(testString.charAt(i) != '.') {
 				if(!Character.isDigit(testString.charAt(i))) {
 					return !returnValue;
 				}
 			}
 		}
-			return returnValue;
+		return returnValue;
 	}
 }

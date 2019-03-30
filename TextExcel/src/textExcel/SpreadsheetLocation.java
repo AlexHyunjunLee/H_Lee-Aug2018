@@ -10,26 +10,23 @@ public class SpreadsheetLocation implements Location
 	private int columnNumber;
 	private int rowNumber;
 	
-    @Override
     public int getRow()
     {
-        // TODO Auto-generated method stub
     	return rowNumber;
     }
 
-    @Override
     public int getCol()
     {
-        // TODO Auto-generated method stub
     	return columnNumber;
     }
-    
+    //returns the location of the cell in the spreadsheet by using the name of the cell
     public SpreadsheetLocation(String cellName)
     {
         // TODO: Fill this out with your own code
     	columnNumber = Character.getNumericValue(cellName.charAt(0)) - 10;
     	rowNumber = ParseInt(cellName.substring(1)) - 1;
     }
+    //returns the input as the integer value
     private int ParseInt(String substring) {
 		return Integer.valueOf(substring);
 	}
