@@ -23,7 +23,7 @@ public class FormulaCell extends RealCell {
 	public double getDoubleValue() {
 		String [] arr = getUserInput().substring(2, getUserInput().length()-2).split(" ");
 		double value = 0.0;	
-		double value2 = 0.0;
+		double valueForCalc = 0.0;
 		if(arr[0].toLowerCase().equals("sum") || arr[0].toLowerCase().equals("avg")) {
 			int count = 0;
 			double avg = 0.0;
@@ -63,31 +63,31 @@ public class FormulaCell extends RealCell {
 			}
 			for(int i = 0; i < arr.length - 1; i += 2) {
 				if(isNumeric(arr[i+2].substring(0, 1))) {
-					value2 = Double.valueOf(arr[i+2]);
+					valueForCalc = Double.valueOf(arr[i+2]);
 				}
 				else {
 					SpreadsheetLocation location = new SpreadsheetLocation(arr[i+2]);
 					if(newSpreadsheet[location.getRow() + 1][location.getCol() + 1] instanceof FormulaCell) {
-						value2 = ((RealCell) newSpreadsheet[location.getRow() + 1][location.getCol() + 1]).getDoubleValue();
+						valueForCalc = ((RealCell) newSpreadsheet[location.getRow() + 1][location.getCol() + 1]).getDoubleValue();
 					}
 					else {
-						value2 = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
+						valueForCalc = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
 					}
 				}
 				if(arr[i+1].equals("+")) {
-					value += value2;
+					value += valueForCalc;
 				}
 				else {
 					if(arr[i+1].equals("-")) {
-						value -= value2;
+						value -= valueForCalc;
 					}
 					else {
 						if(arr[i+1].equals("*")) {
-							value *= value2;
+							value *= valueForCalc;
 						}
 						else {
 							if(arr[i+1].equals("/")) {
-								value /= value2;
+								value /= valueForCalc;
 							}
 						}
 					}	
