@@ -1,10 +1,8 @@
 // @author Alex Lee
 // @version March 4, 2019
+//This class contain methods to make the spreadsheet and to command any changes to it
 
 package textExcel;
-
-
-// Update this file with your own code.
 
 public class Spreadsheet implements Grid	{
 	private int numberOfRows = 20;
@@ -12,9 +10,9 @@ public class Spreadsheet implements Grid	{
 	static Cell [][] spreadsheet = new Cell [21][13];
 	//constructor - puts empty cells initially
 	public Spreadsheet() {
-		for(int i = 0; i < 21; i++) {
-			for(int j = 0; j < 13; j++) {
-				spreadsheet [i][j] = new EmptyCell();
+		for(int row = 0; row < 21; row++) {
+			for(int col = 0; col < 13; col++) {
+				spreadsheet [row][col] = new EmptyCell();
 			}
 		}
 	}
@@ -28,17 +26,17 @@ public class Spreadsheet implements Grid	{
 				spreadsheet[location.getRow() + 1][location.getCol() + 1] = valueCell;	
 				return getGridText();
 			} else if (data[2].contains("%")) {//if it is percent cell
-					PercentCell percentCell = new PercentCell(data[2]);
-					spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
-					return getGridText();
+				PercentCell percentCell = new PercentCell(data[2]);
+				spreadsheet[location.getRow() + 1][location.getCol() + 1] = percentCell;	
+				return getGridText();
 			} else if(data[2].substring(0,1).equals("(") && (command.contains("+") || command.contains("-") || command.contains("*") || command.contains("/") || command.substring(command.length()-1).equals(")"))) {
-					FormulaCell formulaCell = new FormulaCell(data[2]);//if it is formula cell
-					spreadsheet[location.getRow() + 1][location.getCol() + 1] = formulaCell;
-					return getGridText();
+				FormulaCell formulaCell = new FormulaCell(data[2]);//if it is formula cell
+				spreadsheet[location.getRow() + 1][location.getCol() + 1] = formulaCell;
+				return getGridText();
 			} else {//if it is not value, formula, or percent, it has to be text cell
-					TextCell cell = new TextCell(data[2]);
-					System.out.println(data[2]);
-					spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
+				TextCell cell = new TextCell(data[2]);
+				System.out.println(data[2]);
+				spreadsheet[location.getRow() + 1][location.getCol() + 1] = cell;
 			}
 		}
 		if (command.length() <= 3 && command.length() != 0) {//if it is less than or equal to length of 3, it is definitely asking for the full cell text of that cell
@@ -51,9 +49,9 @@ public class Spreadsheet implements Grid	{
 			spreadsheet[location.getRow() + 1][location.getCol() + 1] = new EmptyCell();
 		} else { 
 			if (command.toLowerCase().equals("clear")) {//if the command is just clear, it clears entire spreadsheet
-				for(int i = 0; i < 21; i++) {
-					for(int j = 0; j < 13; j++) {
-						spreadsheet [i][j] = new EmptyCell();
+				for(int row = 0; row < 21; row++) {
+					for(int col = 0; col < 13; col++) {
+						spreadsheet [row][col] = new EmptyCell();
 					}
 				}
 			}
@@ -63,22 +61,18 @@ public class Spreadsheet implements Grid	{
 		}
 		return getGridText();
 	}
-
 	//Returns the number of rows in the spreadsheet
 	public int getRows() {
 		return numberOfRows;
 	}
-
 	//Returns the number of columns in the spreadsheet
 	public int getCols() {
 		return numberOfColumns;
 	}
 	//returns the cell from the desired location
-	public Cell getCell(Location loc)
-	{
+	public Cell getCell(Location loc) {
 		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
 	}
-
 	//Returns the entire spreadsheet
 	public String getGridText() {
 		String grid = "";

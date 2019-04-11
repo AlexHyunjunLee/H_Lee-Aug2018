@@ -1,5 +1,6 @@
 // @author Alex Lee
 // @version March 19, 2019
+//This class contain methods for the percent cell
 
 package textExcel;
 
@@ -21,13 +22,10 @@ public class PercentCell extends RealCell {
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {
-		String initial = getUserInput();
-		String returnString = "" + getDoubleValue(initial);
-		return returnString;
+		return ""+getDoubleValue(getUserInput());
 	}
 	//Returns the double value of a percent cell
 	public double getDoubleValue(String input) {
 		return (Double.parseDouble(input.substring(0, input.indexOf("%")))/100);
 	}
-	
 }

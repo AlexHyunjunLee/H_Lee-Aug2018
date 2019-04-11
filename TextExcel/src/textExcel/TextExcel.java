@@ -1,10 +1,10 @@
 // @author Alex Lee
 // @version March 4, 2019
+//This class is client code for making the spreadsheet with the methods from various classes.
 
 package textExcel;
 
 import java.util.Scanner;
-
 import textExcel.TestsALL.TestLocation;
 
 public class TextExcel {

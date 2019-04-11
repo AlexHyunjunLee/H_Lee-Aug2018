@@ -1,5 +1,6 @@
 // @author Alex Lee
 // @version March 19, 2019
+//This class contain methods for the formula cell
 
 package textExcel;
 
@@ -11,14 +12,8 @@ public class FormulaCell extends RealCell {
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
-		String cellContents = "" + this.getDoubleValue();
-		if(cellContents.length() > 10) {
-			return(cellContents.substring(0, 10));
-		}
-		else {
-			cellContents += "          ";//adds 10 spaces in order to fill up the needed part
-			return(cellContents.substring(0, 10));
-		}
+		String cellContents = this.getDoubleValue()+ "          ";//adds 10 spaces in order to fill up the needed part
+		return(cellContents.substring(0, 10));
 	}
 	//calculates the formula of a formula cell
 	public double getDoubleValue() {
@@ -30,11 +25,11 @@ public class FormulaCell extends RealCell {
 			double avg = 0.0;
 			String [] arr2 = arr[1].split("-");
 			SpreadsheetLocation firstCell = new SpreadsheetLocation(arr2[0]);
-			SpreadsheetLocation lastCell = new SpreadsheetLocation(arr2[1]);
-			int startRow = firstCell.getRow() + 1;
-			int startCol = firstCell.getCol() + 1;
-			for(int row = startRow; row <= lastCell.getRow() + 1; row++) {
-				for(int col = startCol; col <= lastCell.getCol() + 1; col++) {
+			SpreadsheetLocation nextCell = new SpreadsheetLocation(arr2[1]);
+			int firstRow = firstCell.getRow() + 1;
+			int firstCol = firstCell.getCol() + 1;
+			for(int row = firstRow; row <= nextCell.getRow() + 1; row++) {
+				for(int col = firstCol; col <= nextCell.getCol() + 1; col++) {
 					if(newSpreadsheet[row][col] instanceof FormulaCell) {
 						value += ((RealCell) newSpreadsheet[row][col]).getDoubleValue();
 					}
@@ -97,7 +92,7 @@ public class FormulaCell extends RealCell {
 		}
 		return value;
 	}
-	//Tests if a string is numeric (only containing number, a '.', or a '-')
+	//Tests if a string is numeric (only containing number, a '.', or a '-') Got it from the spreadsheet
 	public boolean isNumeric(String input) {
 		String testedValue;
 		boolean returnValue = true;
