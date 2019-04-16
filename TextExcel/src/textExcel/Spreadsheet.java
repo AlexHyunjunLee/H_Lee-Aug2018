@@ -4,6 +4,8 @@
 
 package textExcel;
 
+import java.util.ArrayList;
+
 public class Spreadsheet implements Grid	{
 	private int numberOfRows = 20;
 	private int numberOfColumns = 12;
@@ -41,6 +43,43 @@ public class Spreadsheet implements Grid	{
 		}
 		if (command.equals("")) {
 			return "";
+		}
+		if (command.toLowerCase().contains("sorta")){
+			String[] data = command.split(" ", 2)[1].split("-");//example: J10-L19
+			SpreadsheetLocation startCell = new SpreadsheetLocation(data[0]);
+			SpreadsheetLocation endCell = new SpreadsheetLocation(data[1]);
+			ArrayList <String> sortingPlace = new ArrayList<String>();
+			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
+				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
+					sortingPlace.add(spreadsheet[row+1][col+1].fullCellText());//stores every value into array list
+				}
+			}//variable count is needed because in this code, I have to count the how much I'm repeating multiple times
+			for (int count1=0; count1 < sortingPlace.size(); count1++) {
+				for (int count2=count1+1; count2 < sortingPlace.size(); count2++) {
+					if (Character.getNumericValue(sortingPlace.get(count1).charAt(0)) > Character.getNumericValue(sortingPlace.get(count2).charAt(0))) {//only needs first character; greater number for char means that it is the alphabet coming after
+						String characterComingAfter = sortingPlace.get(count1);
+						sortingPlace.set(count1, sortingPlace.get(count2));
+						sortingPlace.set(count2, characterComingAfter);
+					} else {
+					int count = 0;
+					while (Character.getNumericValue(sortingPlace.get(count1).charAt(count)) == Character.getNumericValue(sortingPlace.get(count2).charAt(count))) {//if both value have same character at the front
+						count ++;
+					}
+					if (Character.getNumericValue(sortingPlace.get(count1).charAt(count)) > Character.getNumericValue(sortingPlace.get(count2).charAt(count))) {//if the value coming after has sooner alphabet than the previous value
+						String characterComingAfter = sortingPlace.get(count1);
+						sortingPlace.set(count1, sortingPlace.get(count2));
+						sortingPlace.set(count2, characterComingAfter);
+					}
+					}
+				}
+			}
+			int count = 0;//counting until it reaches the final value that has to be stored into the cell.
+			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
+				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
+					spreadsheet[row+1][col+1] = new TextCell(sortingPlace.get(count));
+					count++;
+				}
+			}
 		}
 		return getGridText();
 	}
