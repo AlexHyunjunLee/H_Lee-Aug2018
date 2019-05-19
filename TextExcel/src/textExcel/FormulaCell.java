@@ -5,7 +5,7 @@
 package textExcel;
 
 public class FormulaCell extends RealCell {
-	Cell [][] newSpreadsheet = Spreadsheet.spreadsheet;
+	Cell [][] newSpreadsheet = Spreadsheet.sheet;
 	//constructor
 	public FormulaCell(String input) {
 		super(input);
@@ -17,7 +17,7 @@ public class FormulaCell extends RealCell {
 	}
 	//calculates the formula of a formula cell
 	public double getDoubleValue() {
-		String [] arr = getUserInput().substring(2, getUserInput().length()-2).split(" ");
+		String [] arr = super.fullCellText().substring(2, super.fullCellText().length()-2).split(" ");
 		double value = 0.0;
 		double valueForCalc = 0.0;
 		if(arr[0].toLowerCase().equals("sum") || arr[0].toLowerCase().equals("avg")) {
@@ -25,11 +25,11 @@ public class FormulaCell extends RealCell {
 			double avg = 0.0;
 			String [] arr2 = arr[1].split("-");
 			SpreadsheetLocation firstCell = new SpreadsheetLocation(arr2[0]);
-			SpreadsheetLocation nextCell = new SpreadsheetLocation(arr2[1]);
+			SpreadsheetLocation lastCell = new SpreadsheetLocation(arr2[1]);
 			int firstRow = firstCell.getRow() + 1;
 			int firstCol = firstCell.getCol() + 1;
-			for(int row = firstRow; row <= nextCell.getRow() + 1; row++) {
-				for(int col = firstCol; col <= nextCell.getCol() + 1; col++) {
+			for(int row = firstRow; row <= lastCell.getRow() + 1; row++) {
+				for(int col = firstCol; col <= lastCell.getCol() + 1; col++) {
 					if(newSpreadsheet[row][col] instanceof FormulaCell) {
 						value += ((RealCell) newSpreadsheet[row][col]).getDoubleValue();
 					}
@@ -72,21 +72,12 @@ public class FormulaCell extends RealCell {
 				}
 				if(arr[i+1].equals("+")) {//if it is addition
 					value += valueForCalc;
-				}
-				else {
-					if(arr[i+1].equals("-")) {//if it is subtraction
-						value -= valueForCalc;
-					}
-					else {
-						if(arr[i+1].equals("*")) {//if it is multiplication
-							value *= valueForCalc;
-						}
-						else {
-							if(arr[i+1].equals("/")) {//if it is division
-								value /= valueForCalc;
-							}
-						}
-					}	
+				} else if(arr[i+1].equals("-")) {//if it is subtraction
+					value -= valueForCalc;
+				} else if(arr[i+1].equals("*")) {//if it is multiplication
+					value *= valueForCalc;
+				} else if(arr[i+1].equals("/")) {//if it is division
+					value /= valueForCalc;
 				}
 			}
 		}

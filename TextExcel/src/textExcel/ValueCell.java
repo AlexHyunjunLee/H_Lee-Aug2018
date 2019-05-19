@@ -14,9 +14,4 @@ public class ValueCell extends RealCell {
 		String value = this.getDoubleValue()+"          ";//gets the value from the superclass with the method getDoubleValue() and adds 10 spaces in order to fill up the needed part
 		return (value.substring(0, 10));
 	}
-	// text for individual cell inspection, not truncated or padded
-	public String fullCellText() {
-		String value = getUserInput();//gets the value from the superclass
-		return value;
-	}
 }

@@ -23,8 +23,4 @@ public class RealCell implements Cell {
 	public String fullCellText() {
 		return cell;          
 	}
-	//created to get the values from the real cell class in the subclasses and not to get confused with fullCellText in subclasses
-	public String getUserInput() {
-		return cell;
-	}
 }
