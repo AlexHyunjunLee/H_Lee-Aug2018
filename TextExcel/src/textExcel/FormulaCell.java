@@ -5,7 +5,7 @@
 package textExcel;
 
 public class FormulaCell extends RealCell {
-	Cell [][] newSpreadsheet = Spreadsheet.sheet;
+	Cell [][] newSpreadsheet = Spreadsheet.dataTable;
 	//constructor
 	public FormulaCell(String input) {
 		super(input);
@@ -20,16 +20,13 @@ public class FormulaCell extends RealCell {
 		String [] arr = super.fullCellText().substring(2, super.fullCellText().length()-2).split(" ");
 		double value = 0.0;
 		double valueForCalc = 0.0;
-		if(arr[0].toLowerCase().equals("sum") || arr[0].toLowerCase().equals("avg")) {
-			int count = 0;
-			double avg = 0.0;
+		if(arr[0].toLowerCase().equals("sum") || arr[0].toLowerCase().equals("avg")) {//Evaluation of arithmetic formula
+			int count = 0;//counts how many cells were used in this calculation (for finding average value)
 			String [] arr2 = arr[1].split("-");
 			SpreadsheetLocation firstCell = new SpreadsheetLocation(arr2[0]);
 			SpreadsheetLocation lastCell = new SpreadsheetLocation(arr2[1]);
-			int firstRow = firstCell.getRow() + 1;
-			int firstCol = firstCell.getCol() + 1;
-			for(int row = firstRow; row <= lastCell.getRow() + 1; row++) {
-				for(int col = firstCol; col <= lastCell.getCol() + 1; col++) {
+			for(int row = firstCell.getRow() + 1; row <= lastCell.getRow() + 1; row++) {
+				for(int col = firstCell.getCol() + 1; col <= lastCell.getCol() + 1; col++) {
 					if(newSpreadsheet[row][col] instanceof FormulaCell) {
 						value += ((RealCell) newSpreadsheet[row][col]).getDoubleValue();
 					}
@@ -39,12 +36,11 @@ public class FormulaCell extends RealCell {
 					count ++;
 				}
 			}
-			avg = value/count;//average 
 			if(arr[0].toLowerCase().equals("avg") && count > 1) {
-				value = avg;
+				value = value/count;//averaging
 			}
 		}
-		else {
+		else {//checkpoint 2
 			if(isNumeric(arr[0].substring(0, 1))) {
 				value = Double.valueOf(arr[0]);
 			}
@@ -60,8 +56,7 @@ public class FormulaCell extends RealCell {
 			for(int i = 0; i < arr.length - 1; i += 2) {
 				if(isNumeric(arr[i+2].substring(0, 1))) {
 					valueForCalc = Double.valueOf(arr[i+2]);
-				}
-				else {
+				} else {
 					SpreadsheetLocation location = new SpreadsheetLocation(arr[i+2]);
 					if(newSpreadsheet[location.getRow() + 1][location.getCol() + 1] instanceof FormulaCell) {
 						valueForCalc = ((RealCell) newSpreadsheet[location.getRow() + 1][location.getCol() + 1]).getDoubleValue();
@@ -89,8 +84,7 @@ public class FormulaCell extends RealCell {
 		boolean returnValue = true;
 		if(input.charAt(0) == '-') {//if it has the negative sign		
 			testedValue = input.substring(1);			
-		}
-		else {
+		} else {
 			testedValue = input;	
 		}
 		for(int i=0; i<testedValue.length(); i++) {
