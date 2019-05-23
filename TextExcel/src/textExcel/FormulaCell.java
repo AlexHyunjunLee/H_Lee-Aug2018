@@ -29,8 +29,7 @@ public class FormulaCell extends RealCell {
 				for(int col = firstCell.getCol() + 1; col <= lastCell.getCol() + 1; col++) {
 					if(newSpreadsheet[row][col] instanceof FormulaCell) {
 						value += ((RealCell) newSpreadsheet[row][col]).getDoubleValue();
-					}
-					else {
+					} else {
 						value += Double.valueOf(newSpreadsheet[row][col].fullCellText());
 					}
 					count ++;
@@ -39,17 +38,14 @@ public class FormulaCell extends RealCell {
 			if(arr[0].toLowerCase().equals("avg") && count > 1) {
 				value = value/count;//averaging
 			}
-		}
-		else {//checkpoint 2
+		} else {//checkpoint 2
 			if(isNumeric(arr[0].substring(0, 1))) {
 				value = Double.valueOf(arr[0]);
-			}
-			else {
+			} else {
 				SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
 				if(newSpreadsheet[location.getRow() + 1][location.getCol() + 1] instanceof FormulaCell) {
 					value = ((RealCell) newSpreadsheet[location.getRow() + 1][location.getCol() + 1]).getDoubleValue();
-				}
-				else {
+				} else {
 					value = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
 				}
 			}
@@ -60,8 +56,7 @@ public class FormulaCell extends RealCell {
 					SpreadsheetLocation location = new SpreadsheetLocation(arr[i+2]);
 					if(newSpreadsheet[location.getRow() + 1][location.getCol() + 1] instanceof FormulaCell) {
 						valueForCalc = ((RealCell) newSpreadsheet[location.getRow() + 1][location.getCol() + 1]).getDoubleValue();
-					}
-					else {
+					} else {
 						valueForCalc = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
 					}
 				}
