@@ -62,24 +62,22 @@ public class Spreadsheet implements Grid	{
 			}//variable count is needed because in this code, I have to count the how much I'm repeating multiple times
 			for (int count1=0; count1 < sortingAlphabet.size(); count1++) {
 				for (int count2=count1+1; count2 < sortingAlphabet.size(); count2++) {
-					if (Character.getNumericValue(sortingAlphabet.get(count1).charAt(0)) > Character.getNumericValue(sortingAlphabet.get(count2).charAt(0))) {//only needs first character; greater number for char means that it is the alphabet coming after
+					if (sortingAlphabet.get(count1).compareTo(sortingAlphabet.get(count2))>0) {//only needs first character; greater number for char means that it is the alphabet coming after
 						String characterComingAfter = sortingAlphabet.get(count1);
 						sortingAlphabet.set(count1, sortingAlphabet.get(count2));
 						sortingAlphabet.set(count2, characterComingAfter);
-					} else {
-						int count = 0;
-						while (Character.getNumericValue(sortingAlphabet.get(count1).charAt(count)) == Character.getNumericValue(sortingAlphabet.get(count2).charAt(count))) {//if both value have same character at the front
-							count ++;
-						}
-						if (Character.getNumericValue(sortingAlphabet.get(count1).charAt(count)) > Character.getNumericValue(sortingAlphabet.get(count2).charAt(count))) {//if the value coming after has sooner alphabet than the previous value
-							String characterComingAfter = sortingAlphabet.get(count1);
-							sortingAlphabet.set(count1, sortingAlphabet.get(count2));
-							sortingAlphabet.set(count2, characterComingAfter);
-						}
 					}
 				}
 			}
-			Collections.sort(sortingNumber);
+			for (int count1=0; count1 < sortingNumber.size(); count1++) {
+				for (int count2=count1+1; count2 < sortingNumber.size(); count2++) {
+					if (sortingNumber.get(count1).compareTo(sortingNumber.get(count2))>0) {//only needs first character; greater number for char means that it is the alphabet coming after
+						Double characterComingAfter = sortingNumber.get(count1);
+						sortingNumber.set(count1, sortingNumber.get(count2));
+						sortingNumber.set(count2, characterComingAfter);
+					}
+				}
+			}
 			ArrayList<String> sortedData = new ArrayList<String>();
 			for(int i=0;i<sortingNumber.size();i++){//add sorted numbers into final sorted arraylist
 	            sortedData.add(""+sortingNumber.get(i));
@@ -112,25 +110,22 @@ public class Spreadsheet implements Grid	{
 			}//variable count is needed because in this code, I have to count the how much I'm repeating multiple times
 			for (int count1=0; count1 < sortingAlphabet.size(); count1++) {
 				for (int count2=count1+1; count2 < sortingAlphabet.size(); count2++) {
-					if (Character.getNumericValue(sortingAlphabet.get(count1).charAt(0)) < Character.getNumericValue(sortingAlphabet.get(count2).charAt(0))) {//only needs first character; greater number for char means that it is the alphabet coming after
+					if (sortingAlphabet.get(count1).compareTo(sortingAlphabet.get(count2))<0) {//only needs first character; greater number for char means that it is the alphabet coming after
 						String characterComingAfter = sortingAlphabet.get(count1);
 						sortingAlphabet.set(count1, sortingAlphabet.get(count2));
 						sortingAlphabet.set(count2, characterComingAfter);
-					} else {
-						int count = 0;
-						while (Character.getNumericValue(sortingAlphabet.get(count1).charAt(count)) == Character.getNumericValue(sortingAlphabet.get(count2).charAt(count))) {//if both value have same character at the front
-							count ++;
-						}
-						if (Character.getNumericValue(sortingAlphabet.get(count1).charAt(count)) < Character.getNumericValue(sortingAlphabet.get(count2).charAt(count))) {//if the value coming after has sooner alphabet than the previous value
-							String characterComingAfter = sortingAlphabet.get(count1);
-							sortingAlphabet.set(count1, sortingAlphabet.get(count2));
-							sortingAlphabet.set(count2, characterComingAfter);
-						}
 					}
 				}
 			}
-			Collections.sort(sortingNumber);
-			Collections.reverse(sortingNumber);
+			for (int count1=0; count1 < sortingNumber.size(); count1++) {
+				for (int count2=count1+1; count2 < sortingNumber.size(); count2++) {
+					if (sortingNumber.get(count1).compareTo(sortingNumber.get(count2))<0) {//only needs first character; greater number for char means that it is the alphabet coming after
+						Double characterComingAfter = sortingNumber.get(count1);
+						sortingNumber.set(count1, sortingNumber.get(count2));
+						sortingNumber.set(count2, characterComingAfter);
+					}
+				}
+			}
 			ArrayList<String> sortedData = new ArrayList<String>();
 			for(int i=0;i<sortingNumber.size();i++){//add sorted numbers into final sorted arraylist
 	            sortedData.add(""+sortingNumber.get(i));
