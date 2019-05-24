@@ -4,7 +4,7 @@
 
 package textExcel;
 
-public class RealCell implements Cell {
+public class RealCell implements Cell, Comparable<Object> {
 	private String cell;
 	//constructor
 	public RealCell(String input) {
@@ -23,4 +23,12 @@ public class RealCell implements Cell {
 	public String fullCellText() {
 		return cell;          
 	}
+	@Override
+	public int compareTo(Object str) {
+		RealCell you = (RealCell) str;
+		double comparison = this.getDoubleValue()-you.getDoubleValue();
+		System.out.println(comparison);
+		return (int) comparison;
+	}
+
 }

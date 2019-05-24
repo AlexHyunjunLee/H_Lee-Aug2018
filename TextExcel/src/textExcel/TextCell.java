@@ -4,7 +4,7 @@
 
 package textExcel;
 
-public class TextCell implements Cell {
+public class TextCell implements Cell, Comparable<Object> {
 	private String text;
 	//constructor
 	public TextCell(String text) {
@@ -22,5 +22,9 @@ public class TextCell implements Cell {
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() {
 		return text;
+	}
+	public int compareTo(Object str) {
+		TextCell you = (TextCell) str;
+		return this.fullCellText().compareTo(you.fullCellText());
 	}
 }

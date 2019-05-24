@@ -9,6 +9,7 @@ import textExcel.TestsALL.TestLocation;
 
 public class TextExcel {
 	public static void main(String[] args) {
+		
 		Spreadsheet grid = new Spreadsheet();
 		System.out.println(grid.getGridText());
 		System.out.println(grid.getCell(new TestLocation(0,0)).fullCellText());

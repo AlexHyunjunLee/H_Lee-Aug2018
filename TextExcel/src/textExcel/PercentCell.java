@@ -28,4 +28,10 @@ public class PercentCell extends RealCell {
 	public double getDoubleValue(String input) {
 		return (Double.parseDouble(input.substring(0, input.indexOf("%")))/100);
 	}
+	public int compareTo(Object str) {
+		PercentCell you = (PercentCell) str;
+		double comparison = this.getDoubleValue()-you.getDoubleValue();
+		System.out.println(comparison);
+		return (int) comparison;
+	}
 }
