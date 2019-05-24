@@ -24,7 +24,7 @@ public class TextCell implements Cell, Comparable<Object> {
 		return text;
 	}
 	public int compareTo(Object str) {
-		TextCell comparedString = (TextCell) str;
+		TextCell comparedString = (TextCell) str;//Cast input object into Textcell
 		return this.fullCellText().compareTo(comparedString.fullCellText());
 	}
 }
