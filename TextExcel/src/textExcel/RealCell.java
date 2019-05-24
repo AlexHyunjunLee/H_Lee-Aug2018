@@ -23,12 +23,14 @@ public class RealCell implements Cell, Comparable<Object> {
 	public String fullCellText() {
 		return cell;          
 	}
-	@Override
 	public int compareTo(Object str) {
-		RealCell you = (RealCell) str;
-		double comparison = this.getDoubleValue()-you.getDoubleValue();
-		System.out.println(comparison);
-		return (int) comparison;
+		RealCell comparedString = (RealCell) str;
+		if(this.getDoubleValue()>comparedString.getDoubleValue()) {
+			return 1;
+		}
+		if(this.getDoubleValue()<comparedString.getDoubleValue()) {
+			return -1;
+		}
+		return 0;
 	}
-
 }

@@ -21,17 +21,11 @@ public class PercentCell extends RealCell {
 		return(percent.substring(0, 10));
 	}
 	// text for individual cell inspection, not truncated or padded
-	public String fullCellText() {
-		return ""+getDoubleValue(super.fullCellText());
+	public String fullCellText() {//override necessary since need to remove "%" sign
+		return ""+getDoubleValue();
 	}
 	//Returns the double value of a percent cell
-	public double getDoubleValue(String input) {
-		return (Double.parseDouble(input.substring(0, input.indexOf("%")))/100);
-	}
-	public int compareTo(Object str) {
-		PercentCell you = (PercentCell) str;
-		double comparison = this.getDoubleValue()-you.getDoubleValue();
-		System.out.println(comparison);
-		return (int) comparison;
+	public double getDoubleValue() {
+		return (Double.parseDouble(super.fullCellText().substring(0, super.fullCellText().indexOf("%")))/100);
 	}
 }
