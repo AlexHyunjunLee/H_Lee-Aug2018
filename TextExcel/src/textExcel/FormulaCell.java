@@ -38,12 +38,12 @@ public class FormulaCell extends RealCell {
 			if(arr[0].toLowerCase().equals("avg") && count > 1) {
 				value = value/count;//averaging
 			}
-		} else {//checkpoint 2
+		} else {//checkpoint 3-4
 			if(isNumeric(arr[0].substring(0, 1))) {
 				value = Double.valueOf(arr[0]);
 			} else {
 				SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
-				if(newSpreadsheet[location.getRow() + 1][location.getCol() + 1] instanceof FormulaCell) {
+				if(newSpreadsheet[location.getRow() + 1][location.getCol() + 1] instanceof FormulaCell) {//adds "+1" because first row/col are headings. (eg. 1st row is actually in the 2nd row)
 					value = ((RealCell) newSpreadsheet[location.getRow() + 1][location.getCol() + 1]).getDoubleValue();
 				} else {
 					value = Double.valueOf(newSpreadsheet[location.getRow() + 1][location.getCol() + 1].fullCellText());
@@ -75,13 +75,11 @@ public class FormulaCell extends RealCell {
 	}
 	//Tests if a string is numeric (only containing number, a '.', or a '-') Got it from the spreadsheet
 	public boolean isNumeric(String input) {
-		String testedValue;
+		String testedValue = input;
 		boolean returnValue = true;
 		if(input.charAt(0) == '-') {//if it has the negative sign		
 			testedValue = input.substring(1);			
-		} else {
-			testedValue = input;	
-		}
+		} 
 		for(int i=0; i<testedValue.length(); i++) {
 			if(testedValue.charAt(i) != '.') {//if it doesn't have the decimal point, it checks for that value
 				if(!Character.isDigit(testedValue.charAt(i))) {//if it is number, it is true, but if it is letter, it returns false

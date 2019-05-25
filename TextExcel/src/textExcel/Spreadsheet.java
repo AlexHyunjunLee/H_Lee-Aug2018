@@ -10,7 +10,7 @@ import java.util.Collections;
 public class Spreadsheet implements Grid	{
 	private int numberOfRows = 20;
 	private int numberOfColumns = 12;
-	static Cell [][] dataTable = new Cell [21][13];//one more row for the Alphabet and more column for the number
+	static Cell [][] dataTable = new Cell [21][13];//Extra row/col(21 and 13) because we need 1 col/row for col/row headings ((A-L) & (1-20))
 	//constructor - puts empty cells initially
 	public Spreadsheet() {
 		for(int row = 0; row <= 20; row++) {
@@ -29,117 +29,76 @@ public class Spreadsheet implements Grid	{
 			SpreadsheetLocation location = new SpreadsheetLocation(command);
 			return dataTable [location.getRow()+1][location.getCol()+1].fullCellText();
 		}
+		if (command.toLowerCase().equals("clear")) {//if the command is just clear, it clears entire spreadsheet
+			for(int row = 0; row < 21; row++) {
+				for(int col = 0; col < 13; col++) {
+					dataTable [row][col] = new EmptyCell();
+				}
+			}
+		}
 		if (command.toLowerCase().contains("clear ")) {//if the command is to clear certain cell, it just replace the cell with empty cell
 			String [] splitInput = command.split(" ", 2);
 			SpreadsheetLocation location = new SpreadsheetLocation(splitInput[1]);
 			dataTable[location.getRow() + 1][location.getCol() + 1] = new EmptyCell();
-		} else { 
-			if (command.toLowerCase().equals("clear")) {//if the command is just clear, it clears entire spreadsheet
-				for(int row = 0; row < 21; row++) {
-					for(int col = 0; col < 13; col++) {
-						dataTable [row][col] = new EmptyCell();
+		} 
+		if (command.toLowerCase().contains("sorta")||command.toLowerCase().contains("sortd")){//if this if statement is passed, I assume that this is sorta. I will accomodate for sortd later
+			String[] data = command.split(" ", 2)[1].split("-");//example: J10-L19
+			SpreadsheetLocation startCell = new SpreadsheetLocation(data[0]);
+			SpreadsheetLocation endCell = new SpreadsheetLocation(data[1]);
+			ArrayList <String> sortingAlphabet = new ArrayList<String>();
+			ArrayList <Double> sortingNumber = new ArrayList<Double>();
+			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
+				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
+					if(isNumeric(dataTable[row+1][col+1].fullCellText())) {
+						sortingNumber.add(Double.valueOf(dataTable[row+1][col+1].fullCellText()));//stores every value into array list
+					} else {
+						sortingAlphabet.add(dataTable[row+1][col+1].fullCellText());//stores every value into array list
 					}
+				}
+			}//variable count is needed because in this code, I have to count the how much I'm repeating multiple times
+			for (int count1=0; count1 < sortingAlphabet.size(); count1++) {
+				for (int count2=count1+1; count2 < sortingAlphabet.size(); count2++) {
+					int comparingResult = sortingAlphabet.get(count1).compareTo(sortingAlphabet.get(count2));
+					if (command.toLowerCase().contains("sortd")){//sortd does reverse of sorta. So I would multiply negative number to this variable to does "opposite" of what it would have done for sorta
+						comparingResult*=-1;
+					}
+					if (comparingResult>0) {//only needs first character; greater number for char means that it is the alphabet coming after
+						String characterComingAfter = sortingAlphabet.get(count1);
+						sortingAlphabet.set(count1, sortingAlphabet.get(count2));
+						sortingAlphabet.set(count2, characterComingAfter);
+					}
+				}
+			}
+			for (int count1=0; count1 < sortingNumber.size(); count1++) {
+				for (int count2=count1+1; count2 < sortingNumber.size(); count2++) {
+					int comparingResult = sortingNumber.get(count1).compareTo(sortingNumber.get(count2));
+					if (command.toLowerCase().contains("sortd")){//sortd does reverse of sorta. So I would multiply negative number to this variable to does "opposite" of what it would have done for sorta
+						comparingResult*=-1;
+					}
+					if (comparingResult>0) {//only needs first character; greater number for char means that it is the alphabet coming after
+						Double characterComingAfter = sortingNumber.get(count1);
+						sortingNumber.set(count1, sortingNumber.get(count2));
+						sortingNumber.set(count2, characterComingAfter);
+					}
+				}
+			}
+			ArrayList<String> sortedData = new ArrayList<String>();
+			for(int i=0;i<sortingNumber.size();i++){//add sorted numbers into final sorted arraylist
+	            sortedData.add(""+sortingNumber.get(i));
+	        } 
+			for(int i=0;i<sortingAlphabet.size();i++){//add sorted words into final sorted arraylist
+	            sortedData.add(sortingAlphabet.get(i));
+	        }
+			int count = 0;//counting until it reaches the final value that has to be stored into the cell.
+			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
+				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
+					dataTable[row+1][col+1] = new TextCell(sortedData.get(count));
+					count++;
 				}
 			}
 		}
 		if (command.equals("")) {
 			return "";
-		}
-		if (command.toLowerCase().contains("sorta")){
-			String[] data = command.split(" ", 2)[1].split("-");//example: J10-L19
-			SpreadsheetLocation startCell = new SpreadsheetLocation(data[0]);
-			SpreadsheetLocation endCell = new SpreadsheetLocation(data[1]);
-			ArrayList <String> sortingAlphabet = new ArrayList<String>();
-			ArrayList <Double> sortingNumber = new ArrayList<Double>();
-			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
-				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
-					if(isNumeric(dataTable[row+1][col+1].fullCellText())) {
-						sortingNumber.add(Double.valueOf(dataTable[row+1][col+1].fullCellText()));//stores every value into array list
-					} else {
-						sortingAlphabet.add(dataTable[row+1][col+1].fullCellText());//stores every value into array list
-					}
-				}
-			}//variable count is needed because in this code, I have to count the how much I'm repeating multiple times
-			for (int count1=0; count1 < sortingAlphabet.size(); count1++) {
-				for (int count2=count1+1; count2 < sortingAlphabet.size(); count2++) {
-					if (sortingAlphabet.get(count1).compareTo(sortingAlphabet.get(count2))>0) {//only needs first character; greater number for char means that it is the alphabet coming after
-						String characterComingAfter = sortingAlphabet.get(count1);
-						sortingAlphabet.set(count1, sortingAlphabet.get(count2));
-						sortingAlphabet.set(count2, characterComingAfter);
-					}
-				}
-			}
-			for (int count1=0; count1 < sortingNumber.size(); count1++) {
-				for (int count2=count1+1; count2 < sortingNumber.size(); count2++) {
-					if (sortingNumber.get(count1).compareTo(sortingNumber.get(count2))>0) {//only needs first character; greater number for char means that it is the alphabet coming after
-						Double characterComingAfter = sortingNumber.get(count1);
-						sortingNumber.set(count1, sortingNumber.get(count2));
-						sortingNumber.set(count2, characterComingAfter);
-					}
-				}
-			}
-			ArrayList<String> sortedData = new ArrayList<String>();
-			for(int i=0;i<sortingNumber.size();i++){//add sorted numbers into final sorted arraylist
-	            sortedData.add(""+sortingNumber.get(i));
-	        } 
-			for(int i=0;i<sortingAlphabet.size();i++){//add sorted words into final sorted arraylist
-	            sortedData.add(sortingAlphabet.get(i));
-	        }
-			int count = 0;//counting until it reaches the final value that has to be stored into the cell.
-			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
-				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
-					dataTable[row+1][col+1] = new TextCell(sortedData.get(count));
-					count++;
-				}
-			}
-		}
-		if (command.toLowerCase().contains("sortd")){
-			String[] data = command.split(" ", 2)[1].split("-");//example: J10-L19
-			SpreadsheetLocation startCell = new SpreadsheetLocation(data[0]);
-			SpreadsheetLocation endCell = new SpreadsheetLocation(data[1]);
-			ArrayList <String> sortingAlphabet = new ArrayList<String>();
-			ArrayList <Double> sortingNumber = new ArrayList<Double>();
-			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
-				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
-					if(isNumeric(dataTable[row+1][col+1].fullCellText())) {
-						sortingNumber.add(Double.valueOf(dataTable[row+1][col+1].fullCellText()));//stores every value into array list
-					} else {
-						sortingAlphabet.add(dataTable[row+1][col+1].fullCellText());//stores every value into array list
-					}
-				}
-			}//variable count is needed because in this code, I have to count the how much I'm repeating multiple times
-			for (int count1=0; count1 < sortingAlphabet.size(); count1++) {
-				for (int count2=count1+1; count2 < sortingAlphabet.size(); count2++) {
-					if (sortingAlphabet.get(count1).compareTo(sortingAlphabet.get(count2))<0) {//only needs first character; greater number for char means that it is the alphabet coming after
-						String characterComingAfter = sortingAlphabet.get(count1);
-						sortingAlphabet.set(count1, sortingAlphabet.get(count2));
-						sortingAlphabet.set(count2, characterComingAfter);
-					}
-				}
-			}
-			for (int count1=0; count1 < sortingNumber.size(); count1++) {
-				for (int count2=count1+1; count2 < sortingNumber.size(); count2++) {
-					if (sortingNumber.get(count1).compareTo(sortingNumber.get(count2))<0) {//only needs first character; greater number for char means that it is the alphabet coming after
-						Double characterComingAfter = sortingNumber.get(count1);
-						sortingNumber.set(count1, sortingNumber.get(count2));
-						sortingNumber.set(count2, characterComingAfter);
-					}
-				}
-			}
-			ArrayList<String> sortedData = new ArrayList<String>();
-			for(int i=0;i<sortingNumber.size();i++){//add sorted numbers into final sorted arraylist
-	            sortedData.add(""+sortingNumber.get(i));
-	        } 
-			for(int i=0;i<sortingAlphabet.size();i++){//add sorted words into final sorted arraylist
-	            sortedData.add(sortingAlphabet.get(i));
-	        }
-			int count = 0;//counting until it reaches the final value that has to be stored into the cell.
-			for (int row = startCell.getRow(); row <= endCell.getRow(); row++) {
-				for (int col = startCell.getCol(); col <=endCell.getCol(); col++) {
-					dataTable[row+1][col+1] = new TextCell(sortedData.get(count));
-					count++;
-				}
-			}
 		}
 		return getGridText();
 	}
@@ -210,16 +169,14 @@ public class Spreadsheet implements Grid	{
 	}
 	//Tests if a string is numeric (only containing number, a '.', or a '-')
 	public boolean isNumeric(String input) {
-		String testedValue;
+		String testedValue = input;
 		boolean returnValue = true;
 		if(input.charAt(0) == '-') {//if it has the negative sign		
-			testedValue = input.substring(1);			
-		} else {
-			testedValue = input;	
-		}
+			testedValue = input.substring(1);//takes out negative sign			
+		} 
 		for(int i=0; i<testedValue.length(); i++) {
 			if(testedValue.charAt(i) != '.') {//if it doesn't have the decimal point, it checks for that value
-				if(!Character.isDigit(testedValue.charAt(i))) {//if it is number, it is true, but if it is letter, it returns false
+				if(!Character.isDigit(testedValue.charAt(i))) {//if the ith letter is not number, returns false
 					return !returnValue;
 				}
 			}

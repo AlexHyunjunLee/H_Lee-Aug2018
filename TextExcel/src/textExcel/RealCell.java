@@ -12,7 +12,7 @@ public class RealCell implements Cell, Comparable<Object> {
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
-		String cellContents = cell+= "          ";//adds 10 spaces in order to fill up the needed part;
+		String cellContents = this.getDoubleValue()+"          ";//adds 10 spaces in order to fill up the needed part;
 		return (cellContents.substring(0, 10));
 	}
 	//Returns the double value of a real cell

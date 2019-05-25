@@ -11,12 +11,10 @@ public class PercentCell extends RealCell {
 	}
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() {
-		String percent;
+		String percent = super.fullCellText();
 		if (super.fullCellText().contains(".")) {//checks if there is a decimal point
-			percent = super.fullCellText().substring(0, super.fullCellText().indexOf("."));
-		} else {
-			percent = super.fullCellText();
-		}
+			percent = super.fullCellText().substring(0, super.fullCellText().indexOf("."));//removes values after the decimal point
+		} 
 		percent += "%          ";//adds percent sign with 10 spaces at the end
 		return(percent.substring(0, 10));
 	}
@@ -27,5 +25,6 @@ public class PercentCell extends RealCell {
 	//Returns the double value of a percent cell
 	public double getDoubleValue() {
 		return (Double.parseDouble(super.fullCellText().substring(0, super.fullCellText().indexOf("%")))/100);
+		//first, removes % sign with substring. Then, convert String into double. Lastly, divide by 100 to give a decimal form
 	}
 }
